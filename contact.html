@@ -1,46 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRUE Showroom</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'true-blue': '#01AEE7',
+            'true-dark': '#0FA3C7',
+            'true-yellow': '#FFF500',
+          },
+          fontFamily: {
+            'montserrat': ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
 </head>
+<body class="bg-gray-100 font-montserrat text-base-content antialiased">
 
-<body>
+  <div class="fixed top-0 left-0 h-1 bg-true-yellow z-[60] transition-all duration-100" id="progressBar" style="width: 0%"></div>
 
-<header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
-  <div class="max-w-[1300px] w-full mx-auto px-4">
-    <div class="flex justify-center relative mb-4 lg:mb-0">
-      <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
-      <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-      </button>
+  <header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
+    <div class="max-w-[1300px] w-full mx-auto px-4">
+      <div class="flex justify-center relative mb-4 lg:mb-0">
+        <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
+        <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+      <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
+        <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
-      <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
+ 
+  <main>
+    <section class="bg-gradient-to-r from-[#01AEE7] to-[#0FA3C7] py-16 md:py-24 relative overflow-hidden">
+      <div class="max-w-[1300px] w-full mx-auto px-4 relative z-10 text-center">
+        <p class="inline-block font-bold text-[14px] md:text-[16px] text-[#FFF500] tracking-widest uppercase mb-4 border border-true-yellow px-4 py-1 rounded-full" data-aos="fade-down">Контакты</p>
+        <h1 class="text-white text-[32px] md:text-5xl font-bold leading-tight mb-6 drop-shadow-lg" data-aos="fade-up">
+          ШОУ РУМ TRUE В ТАШКЕНТЕ
+        </h1>
+        <p class="text-white text-[18px] md:text-[27px] font-normal max-w-[1200px] mx-auto opacity-90" data-aos="fade-up" data-aos-delay="200">
+          Посетите наш выставочный зал в Ташкент Сити, Boulevard
+        </p>
+      </div>
+      
+      <svg class="absolute bottom-0 left-0 text-white/10 w-64 h-64" fill="currentColor" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+      <svg class="absolute top-10 right-10 text-white/10 w-32 h-32" fill="currentColor" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="30" />
+      </svg>
+    
+
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-[1300px] mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl rounded-2xl overflow-hidden">
+          <div class="relative h-[400px] md:h-[600px] w-full group">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.336707782992!2d69.28417941163805!3d41.36676877118273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8d2b7364ca3b%3A0x17ae9b1138235319!2sMARS%20IT%20Yunusabad!5e0!3m2!1sen!2s!4v1772200239864!5m2!1sen!2s" width="650" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div> -->
+          </div>
+
+          <div class="p-8 md:p-16 flex flex-col justify-center bg-white relative">
+            <h2 class="text-true-blue font-bold text-xl md:text-2xl mb-8 uppercase tracking-wide border-l-4 border-true-yellow pl-4">
+              Официальный дистрибьютор в Узбекистане - Prowellness
+            </h2>
+
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-cyan-50 flex items-center justify-center text-true-blue flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                </div>
+                <div>
+                  <p class="text-gray-900 font-bold text-lg">+998 (90)-606-66-66</p>
+                  <p class="text-true-blue text-sm">Горячая линия</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-cyan-50 flex items-center justify-center text-true-blue flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <div>
+                  <p class="text-true-blue font-medium">info@prowellness.uz</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-cyan-50 flex items-center justify-center text-true-blue flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <div>
+                  <p class="text-gray-700 font-medium">
+                    Ташкент Сити, Бульвар,<br>
+                    Ул. Фурката 2А
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-100">
+              <div class="flex items-center gap-3 text-true-blue font-bold">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p class="text-lg">
+                  ПН-СБ С 9:00-19:00 <br>
+                  <span class="font-normal text-gray-500">ВС НЕ РАБОЧИЙ</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</main>
 
 
-    <main>
-        <section>
-           contact Sayfullo 
-        </section>
-    </main>
+  <footer class="flex flex-col md:flex-row bg-[#01AEE7] pt-10 pb-6 text-white relative">
+    <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0">
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КАТАЛОГ ТОВАРОВ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">Кардио тренажеры</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Composite Strength</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">True Stretch</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Сайклинг</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Групповые тренировки</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Силовые тренажеры</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Консоли</a>
+      </div>
+    </div>
+    <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0">
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">ИНФОРМАЦИЯ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">О Бренде</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Преимущества</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Открыть клуб</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Продукции</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+      </div>
+    </div>
+    <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0">
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КОНТАКТЫ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">Политика конфиденциальности</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+      </div>
+    </div>
+    <div class="flex-1 px-4 md:px-12 flex flex-col">
+      <h2 class="font-bold text-[16px] mb-4 w-max">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
+      <form onsubmit="event.preventDefault(); alert('Спасибо за подписку!');" class="flex flex-col gap-2">
+        <input type="email" placeholder="Ваш Email" class="bg-white/10 border border-white/30 px-3 py-2 text-white placeholder-white/50 outline-none focus:border-true-yellow">
+        <button type="submit" class="bg-true-yellow text-black font-bold py-2 uppercase hover:bg-white transition-colors">Подписаться</button>
+      </form>
+    </div>
+    <div class="w-full text-center text-xs opacity-70 mt-8 md:mt-0 md:absolute md:bottom-4">
+      © TRUE FITNESS <span id="year"></span>
+    </div>
+  </footer>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+      AOS.init({ once: true, offset: 100, duration: 800 });
 
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navMenu = document.getElementById('navMenu');
 
-    <script src="./main.js"></script>
+      mobileMenuBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('hidden');
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+      };
+  </script>
 </body>
-
 </html>
