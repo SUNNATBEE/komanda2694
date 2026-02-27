@@ -1,50 +1,360 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О бренде - TRUE Fitness</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'true-blue': '#01AEE7',
+            'true-dark': '#0FA3C7',
+            'true-yellow': '#FFF500',
+          },
+          fontFamily: {
+            'montserrat': ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
 </head>
+<body class="m-0 p-0 font-montserrat text-base-content overflow-x-hidden antialiased bg-white">
 
-<body>
+  <div class="fixed top-0 left-0 h-1 bg-true-yellow z-[60] transition-all duration-100" id="progressBar" style="width: 0%"></div>
 
+  <header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
+    <div class="max-w-[1300px] w-full mx-auto px-4">
+      <div class="flex justify-center relative mb-4 lg:mb-0">
+        <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
+        <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+      <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
+        <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <header class="py-4 bg-white">
-        <div class="container max-w-[1300px] w-full mx-auto px-3">
-            <img class="flex justify-center mx-auto my-3" src="./images/log.png" alt="">
-            <ul class="flex items-center justify-between my-3 border-t-2">
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./index.html">Дом</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./product.html">продукции</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./prem.html">преимущества</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./club.html">открыть клуб</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./contact.html">контакты</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-
-
-    <main>
-        <section>
-            о бренде degan joyi qilinadi Abdullo 
-        </section>
+  <main>
+    <section class="bg-[#01AEE7] py-12 relative overflow-hidden" id="hero-section">
+      <div class="max-w-[1300px] w-full mx-auto px-4 relative z-10">
+        <p class="w-max mx-auto font-montserrat font-bold text-[16px] text-[#FFF500] text-center tracking-widest uppercase" data-aos="fade-down">О НАШЕМ БРЕНДЕ</p>
+        <h2 class="w-full max-w-[700px] mx-auto text-white text-3xl md:text-5xl font-montserrat font-bold text-center mt-6 leading-tight drop-shadow-lg" data-aos="fade-up">
+          TRUE - СОВЕРШЕННОE <br> ФИТНЕС-ОБОРУДОВАНИЕ
+        </h2>
+      </div>
     </main>
 
+    <section class="bg-[url('./images/291c6b0faca943b20edb5876b72170f14fe7f972.jpg')] bg-cover bg-center min-h-[600px] md:h-[969px] w-full flex items-center justify-center relative overflow-hidden" id="parallax-bg">
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="w-[90%] md:w-[1030px] bg-white shadow-2xl relative z-10 p-6 md:p-0 flex flex-col justify-center" data-aos="zoom-in-up">
+        <h3 class="w-full font-montserrat font-normal text-[18px] md:text-[22px] text-[#01AEE7] mt-6 md:mt-[90px] px-6 md:px-12">
+          Это совершенство обеспечивается высококачественными, долговечными материалами и технологиями, которые мы используем для производстве наших машин. Но оно также создается и благодаря нашей преданности клиентам и их потребностям.
+        </h3>
+        <h2 class="w-full font-montserrat font-normal text-[18px] md:text-[22px] text-black mt-6 px-6 md:px-12">
+          Наша опытная команда предлагает комплексное обслуживание, начиная от планирования объекта до технического обслуживания и оснащения ваших залов новейшими технологиями. Являясь вашим надежным партнером, мы делаем все возможное, чтобы ваше предприятие продолжало эффективно работать годы и годы.
+        </h2>
+        <h2 class="w-full font-montserrat font-normal text-[18px] md:text-[22px] text-black mt-6 px-6 md:px-12">
+          Вы можете рассчитывать на нас в предоставлении одних из лучших услуг в отрасли. Мы ориентированы на оптимизацию срока службы вашего фитнес-оборудования. Мы всегда ищем способы расширить сферу взаимодействия с нашими клиентами, будь то предоставление учебных материалов для ваших сотрудников и инструкторов, или разработка технологических решений, отвечающих потребностям современных пользователей.
+        </h2>
+        <h3 class="w-full font-montserrat font-bold text-[18px] md:text-[22px] text-[#01AEE7] mt-6 mb-6 px-6 md:px-12">
+          Свяжитесь с нами, чтобы узнать, как партнерство с TRUE может помочь вашей компании добиться успеха.
+        </h3>
+      </div>
+    </section>
 
+    <section class="bg-[#01AEE7] py-12 md:py-16">
+      <div class="max-w-[1300px] mx-auto px-4">
+        <h2 class="text-white text-3xl font-montserrat font-bold text-center py-4 mb-10">Наши инновации</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          <div class="flex flex-col items-center w-full max-w-[300px] group" data-aos="fade-up">
+            <img class="h-[300px] md:h-[368px] w-auto object-contain mb-4 transition-transform duration-500 group-hover:scale-105" src="./images/dc50051ebd696e66ca5c6fcc3fc6e993bb7c01f0.png" alt="Тренажер Лестница TRUE Palisade">
+            <h2 class="text-white text-[20px] md:text-[22px] font-montserrat font-bold leading-tight text-center px-2">
+              Тренажер Лестница TRUE Palisade
+            </h2>
+            <div class="w-[247px] h-[3px] bg-[#FFD233] rounded-[3px] mt-4 mb-3 transition-all duration-300 group-hover:w-full"></div>
+          </div>
+          <div class="flex flex-col items-center w-full max-w-[300px] group" data-aos="fade-up" data-aos-delay="100">
+            <img class="h-[300px] md:h-[368px] w-auto object-contain mb-4 transition-transform duration-500 group-hover:scale-105" src="./images/dc50051ebd696e66ca5c6fcc3fc6e993bb7c01f0.png" alt="Тренажер Лестница TRUE Palisade">
+            <h2 class="text-white text-[20px] md:text-[22px] font-montserrat font-bold leading-tight text-center px-2">
+              Тренажер Лестница TRUE Palisade
+            </h2>
+            <div class="w-[247px] h-[3px] bg-[#FFD233] rounded-[3px] mt-4 mb-3 transition-all duration-300 group-hover:w-full"></div>
+          </div>
+          <div class="flex flex-col items-center w-full max-w-[300px] group" data-aos="fade-up" data-aos-delay="200">
+            <img class="h-[300px] md:h-[368px] w-auto object-contain mb-4 transition-transform duration-500 group-hover:scale-105" src="./images/dc50051ebd696e66ca5c6fcc3fc6e993bb7c01f0.png" alt="Тренажер Лестница TRUE Palisade">
+            <h2 class="text-white text-[20px] md:text-[22px] font-montserrat font-bold leading-tight text-center px-2">
+              Тренажер Лестница TRUE Palisade
+            </h2>
+            <div class="w-[247px] h-[3px] bg-[#FFD233] rounded-[3px] mt-4 mb-3 transition-all duration-300 group-hover:w-full"></div>
+          </div>
+          <div class="flex flex-col items-center w-full max-w-[300px] group" data-aos="fade-up" data-aos-delay="300">
+            <img class="h-[300px] md:h-[368px] w-auto object-contain mb-4 transition-transform duration-500 group-hover:scale-105" src="./images/dc50051ebd696e66ca5c6fcc3fc6e993bb7c01f0.png" alt="Тренажер Лестница TRUE Palisade">
+            <h2 class="text-white text-[20px] md:text-[22px] font-montserrat font-bold leading-tight text-center px-2">
+              Тренажер Лестница TRUE Palisade
+            </h2>
+            <div class="w-[247px] h-[3px] bg-[#FFD233] rounded-[3px] mt-4 mb-3 transition-all duration-300 group-hover:w-full"></div>
+          </div>
+          <div class="flex flex-col items-center w-full max-w-[300px] group" data-aos="fade-up" data-aos-delay="400">
+            <img class="h-[300px] md:h-[368px] w-auto object-contain mb-4 transition-transform duration-500 group-hover:scale-105" src="./images/dc50051ebd696e66ca5c6fcc3fc6e993bb7c01f0.png" alt="Тренажер Лестница TRUE Palisade">
+            <h2 class="text-white text-[20px] md:text-[22px] font-montserrat font-bold leading-tight text-center px-2">
+              Тренажер Лестница TRUE Palisade
+            </h2>
+            <div class="w-[247px] h-[3px] bg-[#FFD233] rounded-[3px] mt-4 mb-3 transition-all duration-300 group-hover:w-full"></div>
+          </div>
+          <div class="flex flex-col items-center w-full max-w-[300px] group" data-aos="fade-up" data-aos-delay="500">
+            <img class="h-[300px] md:h-[368px] w-auto object-contain mb-4 transition-transform duration-500 group-hover:scale-105" src="./images/dc50051ebd696e66ca5c6fcc3fc6e993bb7c01f0.png" alt="Тренажер Лестница TRUE Palisade">
+            <h2 class="text-white text-[20px] md:text-[22px] font-montserrat font-bold leading-tight text-center px-2">
+              Тренажер Лестница TRUE Palisade
+            </h2>
+            <div class="w-[247px] h-[3px] bg-[#FFD233] rounded-[3px] mt-4 mb-3 transition-all duration-300 group-hover:w-full"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script src="./main.js"></script>
+    <section id="contact" class="w-full min-h-[80vh] bg-[url('./images/f975eaf401adaa542a1f182428cc51b0abf9658f.jpg')] bg-cover bg-center flex items-center justify-center px-4 py-12 relative">
+      <div class="absolute inset-0 bg-black/50"></div>
+      <div class="bg-white w-full max-w-[505px] p-6 md:p-8 shadow-2xl relative z-10">
+        <div id="notification" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-[#01AEE7] text-white px-6 py-3 shadow-xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span id="notificationText" class="font-medium">Успешно!</span>
+        </div>
+        <h1 class="w-full font-bold text-xl leading-tight mb-2">Получите эксклюзивное предложение на тренажеры TRUE FITNESS</h1>
+        <p class="w-full text-[13px] text-gray-600 mb-6">Мы будем рады проконсультировать Вас и помочь с подбором оборудования</p>
+        <div class="flex flex-col items-center w-full mx-auto">
+          <div class="w-full mt-4 relative">
+            <input type="text" id="nameInput" placeholder="ИМЯ" class="w-full h-[42px] bg-[#F0F0F0] py-[10px] px-[27px] text-black placeholder-[#AFA3A3] border-none outline-none text-[18px] transition-all duration-300 focus:ring-2 focus:ring-[#01AEE7]">
+            <span id="nameError" class="text-red-500 text-xs absolute -bottom-5 left-0 hidden font-medium">Минимум 3 символа</span>
+          </div>
+          <div class="w-full mt-8 relative">
+            <label for="emailInput" class="sr-only"></label>
+            <input type="email" id="emailInput" placeholder="EMAIL" class="w-full h-[42px] bg-[#F0F0F0] py-[10px] px-[27px] text-black placeholder-[#AFA3A3] border-none outline-none text-[18px] transition-all duration-300 focus:ring-2 focus:ring-[#01AEE7]">
+            <span id="emailError" class="text-red-500 text-xs absolute -bottom-5 left-0 hidden font-medium">Введите корректный email</span>
+          </div>
+          <div class="w-full mt-8 relative">
+            <div class="flex items-center bg-[#F0F0F0] h-[42px] transition-all duration-300 focus-within:ring-2 focus-within:ring-[#01AEE7] overflow-hidden">
+              <div class="flex items-center h-full pl-3 pr-2 border-r border-gray-300">
+                <span class="text-black text-[18px] font-medium select-none">+998</span>
+                <svg class="w-3 h-3 ml-2 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+              <input type="tel" id="phoneInput" placeholder="(99)-999-99-99" class="flex-1 h-full bg-transparent border-none outline-none text-black text-[18px] px-3 placeholder-[#AFA3A3]">
+            </div>
+            <span id="phoneError" class="text-red-500 text-xs absolute -bottom-5 left-0 hidden font-medium">Неверный формат</span>
+          </div>
+          <button id="submitBtn" class="mt-10 w-full h-[46px] bg-[#01AEE7] text-white text-[18px] font-bold transition-all duration-300 hover:bg-[#0096C7] hover:scale-[1.02] active:scale-95 shadow-lg">ОТПРАВИТЬ</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="flex flex-col md:flex-row bg-[#01AEE7] pt-10 pb-6 text-white relative">
+      <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0">
+        <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КАТАЛОГ ТОВАРОВ</h2>
+        <div class="flex flex-col gap-2 text-[14px]">
+          <a href="#" class="hover:text-true-yellow transition-colors">Кардио тренажеры</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Composite Strength</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">True Stretch</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Сайклинг</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Групповые тренировки</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Силовые тренажеры</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Консоли</a>
+        </div>
+      </div>
+      <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0">
+        <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">ИНФОРМАЦИЯ</h2>
+        <div class="flex flex-col gap-2 text-[14px]">
+          <a href="#" class="hover:text-true-yellow transition-colors">О Бренде</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Преимущества</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Открыть клуб</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Продукции</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+        </div>
+      </div>
+      <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0">
+        <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КОНТАКТЫ</h2>
+        <div class="flex flex-col gap-2 text-[14px]">
+          <a href="#" class="hover:text-true-yellow transition-colors">Политика конфиденциальности</a>
+          <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+        </div>
+      </div>
+      <div class="flex-1 px-4 md:px-12 flex flex-col">
+        <h2 class="font-bold text-[16px] mb-4 w-max">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
+        <form onsubmit="event.preventDefault(); alert('Спасибо за подписку!');" class="flex flex-col gap-2">
+          <input type="email" placeholder="Ваш Email" class="bg-white/10 border border-white/30 px-3 py-2 text-white placeholder-white/50 outline-none focus:border-true-yellow">
+          <button type="submit" class="bg-true-yellow text-black font-bold py-2 uppercase hover:bg-white transition-colors">Подписаться</button>
+        </form>
+      </div>
+      <div class="w-full text-center text-xs opacity-70 mt-8 md:mt-0 md:absolute md:bottom-4">
+        © TRUE FITNESS <span id="year"></span>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 100, duration: 800 });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const nameInput = document.getElementById('nameInput');
+        const emailInput = document.getElementById('emailInput');
+        const phoneInput = document.getElementById('phoneInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        
+        let isSubmitted = false;
+
+        function showNotification(text, isError = false) {
+            notificationText.innerText = text;
+            notification.className = `fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-3 shadow-xl transition-all duration-300 z-50 flex items-center gap-3 w-max ${isError ? 'bg-red-500' : 'bg-[#01AEE7]'} text-white opacity-100 pointer-events-auto`;
+            
+            setTimeout(() => {
+                notification.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function toggleError(element, show, errorSpan) {
+            if (show) {
+                element.classList.add('bg-red-50');
+                element.classList.remove('bg-[#F0F0F0]');
+                errorSpan.classList.remove('hidden');
+            } else {
+                element.classList.remove('bg-red-50');
+                element.classList.add('bg-[#F0F0F0]');
+                errorSpan.classList.add('hidden');
+            }
+        }
+
+        nameInput.addEventListener('input', () => {
+            if (nameInput.value.length >= 3) toggleError(nameInput, false, nameError);
+        });
+
+        emailInput.addEventListener('input', () => {
+            if (emailInput.value.includes('@')) toggleError(emailInput, false, emailError);
+        });
+
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            const maxDigits = 9;
+            if (value.length > maxDigits) value = value.slice(0, maxDigits);
+
+            let formattedValue = '';
+            if (value.length > 0) formattedValue += '(' + value.substring(0, 2);
+            if (value.length > 2) formattedValue += ')-' + value.substring(2, 5);
+            if (value.length > 5) formattedValue += '-' + value.substring(5, 7);
+            if (value.length > 7) formattedValue += '-' + value.substring(7, 9);
+
+            e.target.value = formattedValue;
+
+            if (value.length === maxDigits) toggleError(phoneInput, false, phoneError);
+        });
+
+        submitBtn.addEventListener('click', () => {
+            if (isSubmitted) {
+                showNotification('Вы уже отправили заявку!', true);
+                return;
+            }
+
+            let isValid = true;
+
+            if (nameInput.value.length < 3) {
+                toggleError(nameInput, true, nameError);
+                isValid = false;
+            }
+
+            if (!emailInput.value.includes('@')) {
+                toggleError(emailInput, true, emailError);
+                isValid = false;
+            }
+
+            const phoneDigits = phoneInput.value.replace(/\D/g, '').length;
+            if (phoneDigits !== 9) {
+                toggleError(phoneInput, true, phoneError);
+                isValid = false;
+            }
+
+            if (isValid) {
+                isSubmitted = true;
+                submitBtn.innerText = 'ОТПРАВКА...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    showNotification('Данные успешно отправлены!');
+                    submitBtn.innerText = 'ОТПРАВЛЕНО';
+                    submitBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    submitBtn.classList.remove('bg-[#01AEE7]', 'hover:bg-[#0096C7]');
+                    
+                    nameInput.value = '';
+                    emailInput.value = '';
+                    phoneInput.value = '';
+                }, 1000);
+            } else {
+                submitBtn.classList.add('animate-pulse');
+                setTimeout(() => submitBtn.classList.remove('animate-pulse'), 500);
+            }
+        });
+
+        window.onscroll = function() {
+          let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          let scrolled = (winScroll / height) * 100;
+          document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+
+        const heroSection = document.getElementById('hero-section');
+        const parallaxBg = document.getElementById('parallax-bg');
+
+        heroSection.addEventListener('mousemove', (e) => {
+            const { offsetWidth: width, offsetHeight: height } = heroSection;
+            let { offsetX: x, offsetY: y } = e;
+            
+            const xWalk = (x / width * 20) - 10;
+            const yWalk = (y / height * 20) - 10;
+
+            heroSection.style.transform = `translateX(${xWalk}px) translateY(${yWalk}px)`;
+        });
+
+        parallaxBg.addEventListener('mousemove', (e) => {
+            const { offsetWidth: width, offsetHeight: height } = parallaxBg;
+            let { offsetX: x, offsetY: y } = e;
+            
+            const xWalk = (x / width * 20) - 10;
+            const yWalk = (y / height * 20) - 10;
+
+            parallaxBg.style.backgroundPosition = `${50 + xWalk}% ${50 + yWalk}%`;
+        });
+    </script>
 </body>
-
 </html>

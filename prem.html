@@ -7,42 +7,141 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
-
-
-    <header class="py-4 bg-white">
-        <div class="container max-w-[1300px] w-full mx-auto px-3">
-            <img class="flex justify-center mx-auto my-3" src="./images/log.png" alt="">
-            <ul class="flex items-center justify-between my-3 border-t-2">
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./index.html">Дом</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./prem.html">продукции</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./prem.html">преимущества</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./club.html">открыть клуб</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./contact.html">контакты</a>
-                </li>
-            </ul>
-        </div>
-    </header>
+    
+<header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
+  <div class="max-w-[1300px] w-full mx-auto px-4">
+    <div class="flex justify-center relative mb-4 lg:mb-0">
+      <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
+      <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+    <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
+      <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
+        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
+        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
+        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
+        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
+        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 
     <main>
-        <section>
-            Преимущества TRUE FITNESS shu joyini qilasan 
+        <section class="bg-[#01AEE7] py-[55px]">
+            <div class="container max-w-[1300px] w-full mx-auto px-3">
+                <div class="max-w-[920px] w-full mx-auto flex  flex-col items-center gap-3">
+                    <span class="text-[#FFF500] text-center font-bold">НАШИ ПРЕИМУЩЕСТВА</span>
+                    <h2 class="text-[35px] font-bold text-white">Преимущества TRUE FITNESS</h2>
+                    <p class="text-white font-bold ">Благодаря которым мы являемся мировым лидером в производстве
+                        фитнес-оборудования</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-9">
+            <div class="container max-w-[1300px] w-full mx-auto px-3">
+                <div class="flex justify-between flex-wrap gap-7">
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/velik.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Лучшие характеристики в классе</h3>
+                        <p class="text-black text-[13px]">Наши тренажеры имеют самые совершенные характеристики в классе, от более мощных технических показателей до расширенных функциональных возможностей</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/yugurvotti.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Высокая надежность оборудования</h3>
+                        <p class="text-black text-[13px]">Высокое качество тренажеров - это визитная карточка TRUE. Кроме того, TRUE предоставляет до 5 лет полной гарантии на кардио тренажеры.</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/bratla.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Низкая стоимость владения</h3>
+                        <p class="text-black text-[13px]">Тренажеры способны выдерживать серьезную эксплуатационную нагрузку, сохраняя минимальные затраты на сервис, что обеспечивает минимальную стоимость владения</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/computer.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Качественный и оперативный сервис</h3>
+                        <p class="text-black text-[13px]">Оборудование должно работать бесперебойно, поэтому мы уделяем особое внимание наличию всех необходимых запчастей и высокой срочности технического реагирования</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/scohiuzun.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Цены ниже, чем у аналогов</h3>
+                        <p class="text-black text-[13px]">Стоимость тренажеров вас приятно удивит. Несмотря на то, что мы полностью превосходим конкурентов, наши цены ниже</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/qzi.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Совершенная производительность</h3>
+                        <p class="text-black text-[13px]">Тренажеры TRUE обеспечивают непревзойденный уровень тренировок, для достижения самых высоких результатов.</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/soat.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Абсолютные лидеры по количеству инноваций</h3>
+                        <p class="text-black text-[13px]">Наши тренажеры имеют самые совершенные характеристики в классе, от более мощных технических показателей до расширенных функциональных возможностей</p>
+                    </div>
+                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
+                        <img src="./images/doda.png" alt="">
+                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Максимальное удобство и функциональность</h3>
+                        <p class="text-black text-[13px]">Компания TRUE продумывает все технические нюансы и делает тренажеры максимально удобными и функциональными</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
 
+     <footer class="flex flex-col md:flex-row bg-[#01AEE7] pt-10 pb-6 text-white">
+     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КАТАЛОГ ТОВАРОВ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">Кардио тренажеры</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Composite Strength</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">True Stretch</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Сайклинг</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Групповые тренировки</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Силовые тренажеры</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Консоли</a>
+      </div>
+     </div>
+
+     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">ИНФОРМАЦИЯ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">О Бренде</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Преимущества</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Открыть клуб</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Продукции</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+      </div>
+      </div>
+
+     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КОНТАКТЫ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">Политика конфиденциальности</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+      </div>
+      </div>
+
+     <div class="flex-1 px-4 md:px-12 flex flex-col"> 
+      <h2 class="font-bold text-[16px] mb-4 w-max">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
+      <form onsubmit="event.preventDefault(); alert('Спасибо за подписку!');" class="flex flex-col gap-2">
+          <input type="email" placeholder="Ваш Email" class="bg-white/10 border border-white/30 px-3 py-2 text-white placeholder-white/50 outline-none focus:border-true-yellow">
+          <button type="submit" class="bg-yellow-300 text-black font-bold py-2 uppercase hover:bg-white transition-colors">Подписаться</button>
+      </form>
+      </div>
+      
+      <div class="w-full text-center text-xs opacity-70 mt-8 md:mt-0 md:absolute md:bottom-4">
+         © TRUE FITNESS <span id="year"></span>
+      </div>
+  </footer>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="./main.js"></script>
 </body>
