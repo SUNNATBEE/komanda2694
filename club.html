@@ -1,46 +1,509 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Открыть клуб - TRUE Fitness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'true-blue': '#01AEE7',
+            'true-yellow': '#FFF500'
+          },
+          fontFamily: {
+            montserrat: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Montserrat', sans-serif; box-sizing: border-box; }
+
+    /* Page transition */
+    #pageTransition {
+      position: fixed; inset: 0; background: #01AEE7; z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+      pointer-events: none;
+    }
+
+    /* Hero */
+    .hero-bg { background: linear-gradient(135deg, #003d5c 0%, #01AEE7 60%, #0077a8 100%); }
+
+    /* 3D Floor Plan */
+    .floor-plan-wrapper {
+      perspective: 1200px;
+      perspective-origin: 50% 30%;
+    }
+    .floor-plan-img {
+      width: 100%;
+      transform: rotateX(15deg) scale(1.05);
+      transform-origin: center bottom;
+      box-shadow: 0 60px 120px rgba(0,0,0,0.4);
+      transition: transform 0.5s ease;
+    }
+    .floor-plan-img:hover {
+      transform: rotateX(5deg) scale(1.08);
+    }
+
+    /* Form styles */
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e5e7eb;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      transition: border-color 0.2s;
+      background: white;
+    }
+    .form-input:focus { border-color: #01AEE7; }
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .radio-item, .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 2px solid #e5e7eb;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .radio-item:hover, .checkbox-item:hover { border-color: #01AEE7; background: #f0fbff; }
+    input[type="radio"]:checked + .radio-label,
+    input[type="checkbox"]:checked + .checkbox-label { color: #01AEE7; }
+    .radio-item input, .checkbox-item input { accent-color: #01AEE7; width: 18px; height: 18px; }
+
+    /* File upload */
+    .file-upload-btn {
+      background: #01AEE7;
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 12px 28px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .file-upload-btn:hover { background: #0096C7; }
+
+    /* Phone prefix */
+    .phone-group {
+      display: flex;
+      border: 2px solid #e5e7eb;
+      transition: border-color 0.2s;
+    }
+    .phone-group:focus-within { border-color: #01AEE7; }
+    .phone-prefix {
+      padding: 14px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      border-right: 2px solid #e5e7eb;
+      background: #f9f9f9;
+      white-space: nowrap;
+    }
+    .phone-input {
+      flex: 1;
+      padding: 14px 16px;
+      border: none;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  </style>
 </head>
+<body class="bg-white">
 
-<body>
+  <!-- Page transition overlay -->
+  <div id="pageTransition"></div>
 
-<header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
-  <div class="max-w-[1300px] w-full mx-auto px-4">
-    <div class="flex justify-center relative mb-4 lg:mb-0">
-      <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
-      <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-      </button>
+  <!-- Заявка Modal -->
+  <div id="zayavkaModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9000;align-items:center;justify-content:center;">
+    <div style="background:white;max-width:480px;width:90%;padding:32px;position:relative;border-radius:4px;max-height:90vh;overflow-y:auto;">
+      <button onclick="closeModal()" style="position:absolute;top:12px;right:16px;font-size:24px;background:none;border:none;cursor:pointer;">×</button>
+      <h2 style="font-weight:bold;font-size:20px;margin-bottom:8px;" data-ru="Оставить заявку" data-uz="Ariza qoldirish">Оставить заявку</h2>
+      <p style="color:#666;font-size:13px;margin-bottom:24px;" data-ru="Мы свяжемся с вами в ближайшее время" data-uz="Biz siz bilan tez orada bog'lanamiz">Мы свяжемся с вами в ближайшее время</p>
+      <input type="text" id="modalName" placeholder="Ваше имя" style="width:100%;padding:10px 16px;background:#F0F0F0;border:none;outline:none;margin-bottom:12px;font-size:16px;box-sizing:border-box;">
+      <div style="display:flex;align-items:center;background:#F0F0F0;margin-bottom:12px;">
+        <span style="padding:10px 12px;font-weight:600;border-right:1px solid #ccc;">+998</span>
+        <input type="tel" id="modalPhone" placeholder="(99)-999-99-99" style="flex:1;padding:10px 12px;background:transparent;border:none;outline:none;font-size:16px;">
+      </div>
+      <input type="email" id="modalEmail" placeholder="Email" style="width:100%;padding:10px 16px;background:#F0F0F0;border:none;outline:none;margin-bottom:20px;font-size:16px;box-sizing:border-box;">
+      <button onclick="submitModal()" style="width:100%;padding:14px;background:#01AEE7;color:white;font-weight:bold;font-size:16px;border:none;cursor:pointer;" data-ru="ОТПРАВИТЬ" data-uz="YUBORISH">ОТПРАВИТЬ</button>
     </div>
-    <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
-      <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
-      </ul>
-    </nav>
   </div>
-</header>
 
+  <!-- Progress Bar -->
+  <div class="fixed top-0 left-0 h-1 bg-[#FFF500] z-[60] transition-all duration-100" id="progressBar" style="width:0%"></div>
 
-    <main>
-        <section>
-           открыть клуб Muhammadamin
-        </section>
-    </main>
+  <!-- HEADER -->
+  <header class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="max-w-[1300px] w-full mx-auto px-4 py-3 flex items-center justify-between relative">
+      <div class="relative" id="langDropdown">
+        <button onclick="toggleLangMenu()" class="flex items-center gap-1 font-bold text-sm" id="langBtn">
+          <img id="langFlag" src="https://flagcdn.com/w40/ru.png" width="24" class="rounded-sm" alt="flag">
+          <span id="langCode">RU</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div id="langMenu" class="absolute top-full left-0 mt-1 bg-white shadow-lg border rounded hidden z-50 min-w-[80px]">
+          <button onclick="setLang('ru')" class="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 w-full text-sm">
+            <img src="https://flagcdn.com/w40/ru.png" width="20" class="rounded-sm" alt="RU"> RU
+          </button>
+          <button onclick="setLang('uz')" class="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 w-full text-sm">
+            <img src="https://flagcdn.com/w40/uz.png" width="20" class="rounded-sm" alt="UZ"> UZ
+          </button>
+        </div>
+      </div>
+      <a href="./index.html" class="absolute left-1/2 -translate-x-1/2">
+        <img class="h-12 w-auto" src="./images/log.png" alt="TRUE Logo">
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="tel:+998906066666" class="hidden md:block text-sm font-semibold text-black">+998 (90)-606-66-66</a>
+        <button onclick="openModal()" class="bg-[#01AEE7] text-white font-bold text-sm px-5 py-2 hover:bg-[#0096C7] transition-colors" data-ru="ОСТАВИТЬ ЗАЯВКУ" data-uz="ARIZA QOLDIRISH">ОСТАВИТЬ ЗАЯВКУ</button>
+        <button id="mobileMenuBtn" class="lg:hidden text-black p-1">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div class="border-t border-gray-200">
+      <div class="max-w-[1300px] w-full mx-auto px-4">
+        <nav id="navMenu" class="hidden lg:block">
+          <ul class="flex items-center justify-center gap-12 py-3">
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider" href="./index.html" data-ru="О БРЕНДЕ" data-uz="BREND HAQIDA">О БРЕНДЕ</a></li>
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider flex items-center gap-1" href="./product.html" data-ru="ПРОДУКЦИИ" data-uz="MAHSULOTLAR">ПРОДУКЦИИ <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></li>
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider" href="./prem.html" data-ru="ПРЕИМУЩЕСТВА" data-uz="AFZALLIKLAR">ПРЕИМУЩЕСТВА</a></li>
+            <li><a class="text-[13px] font-bold text-[#01AEE7] tracking-wider" href="./club.html" data-ru="ОТКРЫТЬ КЛУБ" data-uz="KLUB OCHISH">ОТКРЫТЬ КЛУБ</a></li>
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider" href="./contact.html" data-ru="КОНТАКТЫ" data-uz="KONTAKTLAR">КОНТАКТЫ</a></li>
+          </ul>
+        </nav>
+        <nav id="navMenuMobile" class="lg:hidden hidden pb-3">
+          <ul class="flex flex-col gap-2 pt-2">
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./index.html" data-ru="О БРЕНДЕ" data-uz="BREND HAQIDA">О БРЕНДЕ</a></li>
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./product.html" data-ru="ПРОДУКЦИИ" data-uz="MAHSULOTLAR">ПРОДУКЦИИ</a></li>
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./prem.html" data-ru="ПРЕИМУЩЕСТВА" data-uz="AFZALLIKLAR">ПРЕИМУЩЕСТВА</a></li>
+            <li><a class="block text-sm font-bold text-[#01AEE7] py-1" href="./club.html" data-ru="ОТКРЫТЬ КЛУБ" data-uz="KLUB OCHISH">ОТКРЫТЬ КЛУБ</a></li>
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./contact.html" data-ru="КОНТАКТЫ" data-uz="KONTAKTLAR">КОНТАКТЫ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
+  <!-- HERO BANNER -->
+  <section class="hero-bg py-24 px-4 text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-40 h-40 border-4 border-white rounded-full"></div>
+      <div class="absolute bottom-10 right-10 w-60 h-60 border-4 border-white rounded-full"></div>
+      <div class="absolute top-1/3 right-1/4 w-24 h-24 border-2 border-white rotate-45"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <p class="text-sm font-semibold tracking-[0.3em] text-[#FFF500] uppercase mb-4" data-aos="fade-down" data-ru="КЛУБ TRUE" data-uz="TRUE KLUBI">КЛУБ TRUE</p>
+      <h1 class="text-4xl md:text-6xl font-black tracking-wider mb-6 leading-tight" data-aos="fade-up" data-aos-delay="100" data-ru="ОТКРЫТЬ КЛУБ ВМЕСТЕ С TRUE" data-uz="TRUE BILAN BIRGA KLUB OCHISH">ОТКРЫТЬ КЛУБ ВМЕСТЕ С TRUE</h1>
+      <p class="text-base md:text-lg font-medium opacity-90 max-w-xl mx-auto tracking-wide" data-aos="fade-up" data-aos-delay="200" data-ru="Мы поможем вам создать идеальный фитнес-клуб с профессиональным оборудованием TRUE FITNESS" data-uz="Biz sizga TRUE FITNESS professional jihozlari bilan ideal fitnes-klub yaratishda yordam beramiz">Мы поможем вам создать идеальный фитнес-клуб с профессиональным оборудованием TRUE FITNESS</p>
+    </div>
+  </section>
 
+  <!-- 3D FLOOR PLAN VISUALIZATION -->
+  <section class="py-20 px-4 bg-gray-950 overflow-hidden" data-aos="fade-up">
+    <div class="max-w-[1100px] mx-auto text-center">
+      <p class="text-[#01AEE7] font-bold text-sm tracking-widest uppercase mb-3" data-ru="ПЛАНИРОВКА ЗАЛА" data-uz="ZAL REJASI">ПЛАНИРОВКА ЗАЛА</p>
+      <h2 class="text-white text-3xl md:text-4xl font-black uppercase mb-12 tracking-wider" data-ru="ПРОФЕССИОНАЛЬНАЯ РАССТАНОВКА ТРЕНАЖЕРОВ" data-uz="TRENAJYORLARNING PROFESSIONAL JOYLASHUVI">ПРОФЕССИОНАЛЬНАЯ РАССТАНОВКА ТРЕНАЖЕРОВ</h2>
+      <div class="floor-plan-wrapper">
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400"
+          alt="Gym floor plan"
+          class="floor-plan-img rounded-sm"
+          loading="lazy"
+        >
+      </div>
+      <div class="flex flex-wrap justify-center gap-8 mt-12 text-white">
+        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-3xl font-black text-[#01AEE7]">500+</div>
+          <div class="text-sm opacity-70 mt-1" data-ru="кв.м оптимально" data-uz="kv.m optimal">кв.м оптимально</div>
+        </div>
+        <div class="w-px bg-white/20 hidden md:block"></div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-3xl font-black text-[#01AEE7]">3D</div>
+          <div class="text-sm opacity-70 mt-1" data-ru="проектирование" data-uz="loyihalash">проектирование</div>
+        </div>
+        <div class="w-px bg-white/20 hidden md:block"></div>
+        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-3xl font-black text-[#01AEE7]">FREE</div>
+          <div class="text-sm opacity-70 mt-1" data-ru="консультация" data-uz="konsultatsiya">консультация</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="./main.js"></script>
+  <!-- APPLICATION FORM SECTION -->
+  <section class="py-20 px-4 bg-white">
+    <div class="max-w-[900px] mx-auto">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <p class="text-[#01AEE7] font-bold text-sm tracking-widest uppercase mb-3" data-ru="НАЧНИТЕ СЕЙЧАС" data-uz="HOZIROQ BOSHLANG">НАЧНИТЕ СЕЙЧАС</p>
+        <h2 class="text-3xl md:text-5xl font-black uppercase text-gray-900 tracking-wider" data-ru="ОТПРАВИТЬ ЗАЯВКУ" data-uz="ARIZA YUBORISH">ОТПРАВИТЬ ЗАЯВКУ</h2>
+        <div class="w-16 h-1 bg-[#01AEE7] mx-auto mt-5"></div>
+      </div>
+
+      <form onsubmit="handleClubSubmit(event)" class="space-y-8" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Name + Email row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="form-label" data-ru="ВАШЕ ИМЯ" data-uz="ISMINGIZ">ВАШЕ ИМЯ</label>
+            <input type="text" id="clubName" class="form-input" placeholder="Иван Иванов">
+          </div>
+          <div>
+            <label class="form-label" data-ru="E-MAIL" data-uz="E-MAIL">E-MAIL</label>
+            <input type="email" id="clubEmail" class="form-input" placeholder="example@mail.com">
+          </div>
+        </div>
+
+        <!-- Phone + City row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="form-label" data-ru="НОМЕР ТЕЛЕФОНА" data-uz="TELEFON RAQAMI">НОМЕР ТЕЛЕФОНА</label>
+            <div class="phone-group">
+              <span class="phone-prefix">+998</span>
+              <input type="tel" id="clubPhone" class="phone-input" placeholder="(99) 999-99-99">
+            </div>
+          </div>
+          <div>
+            <label class="form-label" data-ru="ГОРОД" data-uz="SHAHAR">ГОРОД</label>
+            <input type="text" id="clubCity" class="form-input" placeholder="Ташкент">
+          </div>
+        </div>
+
+        <!-- What to open -->
+        <div>
+          <label class="form-label mb-4" data-ru="ХОТИТЕ ОТКРЫТЬ" data-uz="NIMA OCHMOQCHISIZ">ХОТИТЕ ОТКРЫТЬ</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+            <label class="radio-item">
+              <input type="radio" name="openType" value="studio">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Фитнес студию" data-uz="Fitnes studiya">Фитнес студию</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="openType" value="club">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Фитнес клуб" data-uz="Fitnes klub">Фитнес клуб</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="openType" value="home">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Домашний Спортзал" data-uz="Uy sport zali">Домашний Спортзал</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="openType" value="hotel">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Тренажерный Зал В Отеле/Санатории" data-uz="Mehmonxona/sanatoriya sport zali">Тренажерный Зал В Отеле/Санатории</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="openType" value="corporate">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Корпоративный Спортзал" data-uz="Korporativ sport zali">Корпоративный Спортзал</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Launch timeline -->
+        <div>
+          <label class="form-label mb-4" data-ru="ПЛАНИРУЕМЫЙ СРОК ЗАПУСКА ПРОЕКТА" data-uz="LOYIHANI ISHGA TUSHIRISH MUDDATI">ПЛАНИРУЕМЫЙ СРОК ЗАПУСКА ПРОЕКТА</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+            <label class="radio-item">
+              <input type="radio" name="timeline" value="1month">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="До 1 месяца" data-uz="1 oygacha">До 1 месяца</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="timeline" value="3month">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="1-3 месяца" data-uz="1-3 oy">1-3 месяца</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="timeline" value="6month">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="3-6 месяцев" data-uz="3-6 oy">3-6 месяцев</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="timeline" value="1year">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="6-12 месяцев" data-uz="6-12 oy">6-12 месяцев</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="timeline" value="over1year">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Более 1 года" data-uz="1 yildan ko'proq">Более 1 года</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Services checkboxes -->
+        <div>
+          <label class="form-label mb-4" data-ru="КАКИЕ УСЛУГИ ВАС ИНТЕРЕСУЮТ" data-uz="QAYSI XIZMATLAR SIZNI QIZIQTIRADI">КАКИЕ УСЛУГИ ВАС ИНТЕРЕСУЮТ</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+            <label class="checkbox-item">
+              <input type="checkbox" name="services" value="consult">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Консультация" data-uz="Konsultatsiya">Консультация</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="services" value="equipment">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Подбор Оборудования" data-uz="Jihozlarni tanlash">Подбор Оборудования</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="services" value="layout">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Расстановка Тренажеров На Плане" data-uz="Rejada trenajyorlarni joylashtirish">Расстановка Тренажеров На Плане</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="services" value="leasing">
+              <span class="text-gray-800 font-semibold text-sm" data-ru="Лизинг" data-uz="Lizing">Лизинг</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- File upload -->
+        <div>
+          <label class="form-label mb-4" data-ru="ЗАГРУЗИТЬ ПЛАН ПОМЕЩЕНИЯ" data-uz="XONA REJASINI YUKLASH">ЗАГРУЗИТЬ ПЛАН ПОМЕЩЕНИЯ</label>
+          <div class="flex items-center gap-4">
+            <input type="file" id="clubFile" class="hidden" accept=".pdf,.png,.jpg,.dwg">
+            <button type="button" onclick="document.getElementById('clubFile').click()" class="file-upload-btn" data-ru="ADD FILES" data-uz="FAYL QO'SHISH">ADD FILES</button>
+            <span id="fileNameDisplay" class="text-sm text-gray-500 font-medium" data-ru="Файл не выбран" data-uz="Fayl tanlanmagan">Файл не выбран</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-2 font-medium" data-ru="Поддерживаемые форматы: PDF, PNG, JPG, DWG" data-uz="Qo'llab-quvvatlanadigan formatlar: PDF, PNG, JPG, DWG">Поддерживаемые форматы: PDF, PNG, JPG, DWG</p>
+        </div>
+
+        <!-- Comment -->
+        <div>
+          <label class="form-label" data-ru="КОММЕНТАРИЙ" data-uz="IZOH">КОММЕНТАРИЙ</label>
+          <textarea id="clubComment" class="form-input resize-none" rows="5" placeholder="Расскажите подробнее о вашем проекте..."></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center">
+          <button type="submit" class="bg-[#01AEE7] hover:bg-[#0096C7] text-white font-black text-sm tracking-[0.2em] px-20 py-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" data-ru="ОТПРАВИТЬ" data-uz="YUBORISH">ОТПРАВИТЬ</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US - 3 benefits -->
+  <section class="bg-gray-950 py-20 px-4">
+    <div class="max-w-[1100px] mx-auto">
+      <h2 class="text-white text-center text-3xl font-black uppercase tracking-wider mb-14" data-aos="fade-up" data-ru="ПОЧЕМУ ВЫБИРАЮТ НАС" data-uz="NIMA UCHUN BIZNI TANLASHADI">ПОЧЕМУ ВЫБИРАЮТ НАС</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center tilt-card p-8 border border-white/10 hover:border-[#01AEE7] transition-colors" data-aos="fade-up" data-aos-delay="0">
+          <div class="text-[#01AEE7] mb-4">
+            <svg class="w-14 h-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <h3 class="text-white font-black text-lg uppercase mb-3 tracking-wider" data-ru="ГАРАНТИЯ КАЧЕСТВА" data-uz="SIFAT KAFOLATI">ГАРАНТИЯ КАЧЕСТВА</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-ru="Все тренажеры сертифицированы по международным стандартам качества ISO и имеют расширенную гарантию." data-uz="Barcha trenajyorlar xalqaro ISO sifat standartlariga muvofiq sertifikatlangan va kengaytirilgan kafolatga ega.">Все тренажеры сертифицированы по международным стандартам качества ISO и имеют расширенную гарантию.</p>
+        </div>
+        <div class="text-center tilt-card p-8 border border-white/10 hover:border-[#01AEE7] transition-colors" data-aos="fade-up" data-aos-delay="150">
+          <div class="text-[#01AEE7] mb-4">
+            <svg class="w-14 h-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          </div>
+          <h3 class="text-white font-black text-lg uppercase mb-3 tracking-wider" data-ru="ОПЫТНАЯ КОМАНДА" data-uz="TAJRIBALI JAMOA">ОПЫТНАЯ КОМАНДА</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-ru="Наши специалисты имеют многолетний опыт в проектировании и оснащении фитнес-клубов любого масштаба." data-uz="Bizning mutaxassislarimiz har qanday ko'lamdagi fitnes-klublarni loyihalash va jihozlashda ko'p yillik tajribaga ega.">Наши специалисты имеют многолетний опыт в проектировании и оснащении фитнес-клубов любого масштаба.</p>
+        </div>
+        <div class="text-center tilt-card p-8 border border-white/10 hover:border-[#01AEE7] transition-colors" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-[#01AEE7] mb-4">
+            <svg class="w-14 h-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-white font-black text-lg uppercase mb-3 tracking-wider" data-ru="ЛИЗИНГ И РАССРОЧКА" data-uz="LIZING VA BO'LIB TO'LASH">ЛИЗИНГ И РАССРОЧКА</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-ru="Гибкие условия финансирования позволяют открыть клуб с минимальными первоначальными вложениями." data-uz="Moslashuvchan moliyalashtirish shartlari minimal boshlang'ich investitsiyalar bilan klub ochish imkonini beradi.">Гибкие условия финансирования позволяют открыть клуб с минимальными первоначальными вложениями.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#01AEE7] pt-10 pb-6 text-white relative">
+    <div class="max-w-[1300px] mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <h2 class="font-bold text-[14px] mb-4 border-b border-white/30 pb-2" data-ru="КАТАЛОГ ТОВАРОВ" data-uz="MAHSULOTLAR KATALOGI">КАТАЛОГ ТОВАРОВ</h2>
+        <div class="flex flex-col gap-2 text-[13px]">
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Кардио тренажеры" data-uz="Kardio trenajyorlar">Кардио тренажеры</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors">Composite Strength</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors">True Stretch</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Сайклинг" data-uz="Sайклинг">Сайклинг</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Групповые тренировки" data-uz="Guruh mashg'ulotlari">Групповые тренировки</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Силовые тренажеры" data-uz="Kuch trenajyorlari">Силовые тренажеры</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Консоли" data-uz="Konsollar">Консоли</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-bold text-[14px] mb-4 border-b border-white/30 pb-2" data-ru="ИНФОРМАЦИЯ" data-uz="MA'LUMOT">ИНФОРМАЦИЯ</h2>
+        <div class="flex flex-col gap-2 text-[13px]">
+          <a href="./index.html" class="hover:text-[#FFF500] transition-colors" data-ru="О Бренде" data-uz="Brend haqida">О Бренде</a>
+          <a href="./prem.html" class="hover:text-[#FFF500] transition-colors" data-ru="Преимущества" data-uz="Afzalliklar">Преимущества</a>
+          <a href="./club.html" class="hover:text-[#FFF500] transition-colors" data-ru="Открыть клуб" data-uz="Klub ochish">Открыть клуб</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Продукции" data-uz="Mahsulotlar">Продукции</a>
+          <a href="./contact.html" class="hover:text-[#FFF500] transition-colors" data-ru="Контакты" data-uz="Kontaktlar">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-bold text-[14px] mb-4 border-b border-white/30 pb-2" data-ru="КОНТАКТЫ" data-uz="KONTAKTLAR">КОНТАКТЫ</h2>
+        <div class="flex flex-col gap-2 text-[13px]">
+          <a href="#" class="hover:text-[#FFF500] transition-colors" data-ru="Политика конфиденциальности" data-uz="Maxfiylik siyosati">Политика конфиденциальности</a>
+          <a href="./contact.html" class="hover:text-[#FFF500] transition-colors" data-ru="Контакты" data-uz="Kontaktlar">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-bold text-[14px] mb-4" data-ru="ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ" data-uz="YANGILIKLAR VA AKSIYALARGA OBUNA">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
+        <form onsubmit="event.preventDefault();" class="flex gap-2">
+          <input type="email" placeholder="E-MAIL" class="flex-1 bg-white text-black px-3 py-2 text-sm outline-none min-w-0">
+          <button type="submit" class="bg-[#FFF500] text-black font-bold px-4 py-2 hover:bg-white transition-colors text-lg">›</button>
+        </form>
+        <div class="flex gap-4 mt-4 text-lg">
+          <a href="#" class="hover:text-[#FFF500]">f</a>
+          <a href="#" class="hover:text-[#FFF500]">📷</a>
+          <a href="#" class="hover:text-[#FFF500]">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-xs opacity-60 mt-8">© TRUE FITNESS 2025</div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="./shared.js"></script>
+  <script>
+    // File upload display
+    document.getElementById('clubFile').addEventListener('change', function() {
+      const display = document.getElementById('fileNameDisplay');
+      if (this.files.length > 0) {
+        display.textContent = this.files[0].name;
+        display.style.color = '#01AEE7';
+      } else {
+        display.textContent = 'Файл не выбран';
+        display.style.color = '';
+      }
+    });
+
+    function handleClubSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('clubName').value;
+      const phone = document.getElementById('clubPhone').value;
+      const email = document.getElementById('clubEmail').value;
+      if (!name || name.length < 2) { alert('Введите ваше имя'); return; }
+      if (!phone || phone.length < 5) { alert('Введите номер телефона'); return; }
+      if (!email || !email.includes('@')) { alert('Введите корректный email'); return; }
+      // Clear form
+      e.target.reset();
+      document.getElementById('fileNameDisplay').textContent = 'Файл не выбран';
+      document.getElementById('fileNameDisplay').style.color = '';
+      showToast('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+    }
+  </script>
 </body>
-
 </html>

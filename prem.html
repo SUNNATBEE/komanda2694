@@ -1,149 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Преимущества - TRUE Fitness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'true-blue': '#01AEE7',
+            'true-yellow': '#FFF500'
+          },
+          fontFamily: {
+            montserrat: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Montserrat', sans-serif; }
+
+    /* Page transition */
+    #pageTransition {
+      position: fixed; inset: 0; background: #01AEE7; z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+      pointer-events: none;
+    }
+
+    /* Flip Cards */
+    .flip-card { perspective: 1000px; height: 350px; cursor: pointer; }
+    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); transform-style: preserve-3d; }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+    .flip-card-front { background: #f5f5f5; }
+    .flip-card-back { transform: rotateY(180deg); background: #01AEE7; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; color: white; text-align: center; }
+
+    /* Hero */
+    .hero-bg { background: linear-gradient(135deg, #003d5c 0%, #01AEE7 60%, #0077a8 100%); }
+
+    /* CTA section */
+    .cta-section {
+      background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 20, 40, 0.78);
+    }
+
+    /* Badge */
+    .badge-section { background: linear-gradient(135deg, #012a3a 0%, #01AEE7 100%); }
+  </style>
 </head>
+<body class="bg-white">
 
-<body>
-    
-<header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
-  <div class="max-w-[1300px] w-full mx-auto px-4">
-    <div class="flex justify-center relative mb-4 lg:mb-0">
-      <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
-      <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-      </button>
+  <!-- Page transition overlay -->
+  <div id="pageTransition"></div>
+
+  <!-- Заявка Modal -->
+  <div id="zayavkaModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9000;align-items:center;justify-content:center;">
+    <div style="background:white;max-width:480px;width:90%;padding:32px;position:relative;border-radius:4px;max-height:90vh;overflow-y:auto;">
+      <button onclick="closeModal()" style="position:absolute;top:12px;right:16px;font-size:24px;background:none;border:none;cursor:pointer;">×</button>
+      <h2 style="font-weight:bold;font-size:20px;margin-bottom:8px;" data-ru="Оставить заявку" data-uz="Ariza qoldirish">Оставить заявку</h2>
+      <p style="color:#666;font-size:13px;margin-bottom:24px;" data-ru="Мы свяжемся с вами в ближайшее время" data-uz="Biz siz bilan tez orada bog'lanamiz">Мы свяжемся с вами в ближайшее время</p>
+      <input type="text" id="modalName" placeholder="Ваше имя" style="width:100%;padding:10px 16px;background:#F0F0F0;border:none;outline:none;margin-bottom:12px;font-size:16px;box-sizing:border-box;">
+      <div style="display:flex;align-items:center;background:#F0F0F0;margin-bottom:12px;">
+        <span style="padding:10px 12px;font-weight:600;border-right:1px solid #ccc;">+998</span>
+        <input type="tel" id="modalPhone" placeholder="(99)-999-99-99" style="flex:1;padding:10px 12px;background:transparent;border:none;outline:none;font-size:16px;">
+      </div>
+      <input type="email" id="modalEmail" placeholder="Email" style="width:100%;padding:10px 16px;background:#F0F0F0;border:none;outline:none;margin-bottom:20px;font-size:16px;box-sizing:border-box;">
+      <button onclick="submitModal()" style="width:100%;padding:14px;background:#01AEE7;color:white;font-weight:bold;font-size:16px;border:none;cursor:pointer;" data-ru="ОТПРАВИТЬ" data-uz="YUBORISH">ОТПРАВИТЬ</button>
     </div>
-    <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
-      <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
-        <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
-      </ul>
-    </nav>
   </div>
-</header>
 
+  <!-- Progress Bar -->
+  <div class="fixed top-0 left-0 h-1 bg-[#FFF500] z-[60] transition-all duration-100" id="progressBar" style="width:0%"></div>
 
-    <main>
-        <section class="bg-[#01AEE7] py-[55px]">
-            <div class="container max-w-[1300px] w-full mx-auto px-3">
-                <div class="max-w-[920px] w-full mx-auto flex  flex-col items-center gap-3">
-                    <span class="text-[#FFF500] text-center font-bold">НАШИ ПРЕИМУЩЕСТВА</span>
-                    <h2 class="text-[35px] font-bold text-white">Преимущества TRUE FITNESS</h2>
-                    <p class="text-white font-bold ">Благодаря которым мы являемся мировым лидером в производстве
-                        фитнес-оборудования</p>
-                </div>
+  <!-- HEADER -->
+  <header class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="max-w-[1300px] w-full mx-auto px-4 py-3 flex items-center justify-between relative">
+      <div class="relative" id="langDropdown">
+        <button onclick="toggleLangMenu()" class="flex items-center gap-1 font-bold text-sm" id="langBtn">
+          <img id="langFlag" src="https://flagcdn.com/w40/ru.png" width="24" class="rounded-sm" alt="flag">
+          <span id="langCode">RU</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div id="langMenu" class="absolute top-full left-0 mt-1 bg-white shadow-lg border rounded hidden z-50 min-w-[80px]">
+          <button onclick="setLang('ru')" class="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 w-full text-sm">
+            <img src="https://flagcdn.com/w40/ru.png" width="20" class="rounded-sm" alt="RU"> RU
+          </button>
+          <button onclick="setLang('uz')" class="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 w-full text-sm">
+            <img src="https://flagcdn.com/w40/uz.png" width="20" class="rounded-sm" alt="UZ"> UZ
+          </button>
+        </div>
+      </div>
+      <a href="./index.html" class="absolute left-1/2 -translate-x-1/2">
+        <img class="h-12 w-auto" src="./images/log.png" alt="TRUE Logo">
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="tel:+998906066666" class="hidden md:block text-sm font-semibold text-black">+998 (90)-606-66-66</a>
+        <button onclick="openModal()" class="bg-[#01AEE7] text-white font-bold text-sm px-5 py-2 hover:bg-[#0096C7] transition-colors" data-ru="ОСТАВИТЬ ЗАЯВКУ" data-uz="ARIZA QOLDIRISH">ОСТАВИТЬ ЗАЯВКУ</button>
+        <button id="mobileMenuBtn" class="lg:hidden text-black p-1">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div class="border-t border-gray-200">
+      <div class="max-w-[1300px] w-full mx-auto px-4">
+        <nav id="navMenu" class="hidden lg:block">
+          <ul class="flex items-center justify-center gap-12 py-3">
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider" href="./index.html" data-ru="О БРЕНДЕ" data-uz="BREND HAQIDA">О БРЕНДЕ</a></li>
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider flex items-center gap-1" href="./product.html" data-ru="ПРОДУКЦИИ" data-uz="MAHSULOTLAR">ПРОДУКЦИИ <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a></li>
+            <li><a class="text-[13px] font-bold text-[#01AEE7] tracking-wider" href="./prem.html" data-ru="ПРЕИМУЩЕСТВА" data-uz="AFZALLIKLAR">ПРЕИМУЩЕСТВА</a></li>
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider" href="./club.html" data-ru="ОТКРЫТЬ КЛУБ" data-uz="KLUB OCHISH">ОТКРЫТЬ КЛУБ</a></li>
+            <li><a class="text-[13px] font-bold text-black hover:text-[#01AEE7] transition-colors tracking-wider" href="./contact.html" data-ru="КОНТАКТЫ" data-uz="KONTAKTLAR">КОНТАКТЫ</a></li>
+          </ul>
+        </nav>
+        <nav id="navMenuMobile" class="lg:hidden hidden pb-3">
+          <ul class="flex flex-col gap-2 pt-2">
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./index.html" data-ru="О БРЕНДЕ" data-uz="BREND HAQIDA">О БРЕНДЕ</a></li>
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./product.html" data-ru="ПРОДУКЦИИ" data-uz="MAHSULOTLAR">ПРОДУКЦИИ</a></li>
+            <li><a class="block text-sm font-bold text-[#01AEE7] py-1" href="./prem.html" data-ru="ПРЕИМУЩЕСТВА" data-uz="AFZALLIKLAR">ПРЕИМУЩЕСТВА</a></li>
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./club.html" data-ru="ОТКРЫТЬ КЛУБ" data-uz="KLUB OCHISH">ОТКРЫТЬ КЛУБ</a></li>
+            <li><a class="block text-sm font-bold text-black hover:text-[#01AEE7] py-1" href="./contact.html" data-ru="КОНТАКТЫ" data-uz="KONTAKTLAR">КОНТАКТЫ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero-bg py-24 px-4 text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-40 h-40 border-4 border-white rounded-full"></div>
+      <div class="absolute bottom-10 right-10 w-60 h-60 border-4 border-white rounded-full"></div>
+      <div class="absolute top-1/2 left-1/4 w-20 h-20 border-2 border-white rotate-45"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <p class="text-sm font-semibold tracking-[0.3em] text-[#FFF500] uppercase mb-4" data-aos="fade-down" data-ru="НАШИ ПРЕИМУЩЕСТВА" data-uz="BIZNING AFZALLIKLARIMIZ">НАШИ ПРЕИМУЩЕСТВА</p>
+      <h1 class="text-4xl md:text-6xl font-black tracking-wider mb-6 leading-tight" data-aos="fade-up" data-aos-delay="100" data-ru="ПРЕИМУЩЕСТВА TRUE FITNESS" data-uz="TRUE FITNESS AFZALLIKLARI">ПРЕИМУЩЕСТВА TRUE FITNESS</h1>
+      <p class="text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto tracking-wide" data-aos="fade-up" data-aos-delay="200" data-ru="БЛАГОДАРЯ КОТОРЫМ МЫ ЯВЛЯЕМСЯ МИРОВЫМ ЛИДЕРОМ В ПРОИЗВОДСТВЕ ФИТНЕС-ОБОРУДОВАНИЯ" data-uz="ULAR TUFAYLI BIZ FITNESS USKUNALARI ISHLAB CHIQARISHDA JAHON LIDERI HISOBLANAMIZ">БЛАГОДАРЯ КОТОРЫМ МЫ ЯВЛЯЕМСЯ МИРОВЫМ ЛИДЕРОМ В ПРОИЗВОДСТВЕ ФИТНЕС-ОБОРУДОВАНИЯ</p>
+    </div>
+  </section>
+
+  <!-- ADVANTAGE CARDS 4x2 GRID -->
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-[1300px] mx-auto">
+      <h2 class="text-center text-2xl md:text-3xl font-black text-gray-900 mb-14 tracking-wider" data-aos="fade-up" data-ru="НАШИ КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА" data-uz="BIZNING ASOSIY AFZALLIKLARIMIZ">НАШИ КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Card 1: Велосипед -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/velik.png" alt="Кардио" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="КАРДИО ТРЕНАЖЕРЫ" data-uz="KARDIO TRENAJYORLAR">КАРДИО ТРЕНАЖЕРЫ</h3>
+              </div>
             </div>
-        </section>
-
-        <section class="py-9">
-            <div class="container max-w-[1300px] w-full mx-auto px-3">
-                <div class="flex justify-between flex-wrap gap-7">
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/velik.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Лучшие характеристики в классе</h3>
-                        <p class="text-black text-[13px]">Наши тренажеры имеют самые совершенные характеристики в классе, от более мощных технических показателей до расширенных функциональных возможностей</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/yugurvotti.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Высокая надежность оборудования</h3>
-                        <p class="text-black text-[13px]">Высокое качество тренажеров - это визитная карточка TRUE. Кроме того, TRUE предоставляет до 5 лет полной гарантии на кардио тренажеры.</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/bratla.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Низкая стоимость владения</h3>
-                        <p class="text-black text-[13px]">Тренажеры способны выдерживать серьезную эксплуатационную нагрузку, сохраняя минимальные затраты на сервис, что обеспечивает минимальную стоимость владения</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/computer.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Качественный и оперативный сервис</h3>
-                        <p class="text-black text-[13px]">Оборудование должно работать бесперебойно, поэтому мы уделяем особое внимание наличию всех необходимых запчастей и высокой срочности технического реагирования</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/scohiuzun.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Цены ниже, чем у аналогов</h3>
-                        <p class="text-black text-[13px]">Стоимость тренажеров вас приятно удивит. Несмотря на то, что мы полностью превосходим конкурентов, наши цены ниже</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/qzi.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Совершенная производительность</h3>
-                        <p class="text-black text-[13px]">Тренажеры TRUE обеспечивают непревзойденный уровень тренировок, для достижения самых высоких результатов.</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/soat.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Абсолютные лидеры по количеству инноваций</h3>
-                        <p class="text-black text-[13px]">Наши тренажеры имеют самые совершенные характеристики в классе, от более мощных технических показателей до расширенных функциональных возможностей</p>
-                    </div>
-                    <div class="w-[295px] flex flex-col items-center gap-2 text-center">
-                        <img src="./images/doda.png" alt="">
-                        <h3 class="text-[#01AEE7] font-bold text-[22px]">Максимальное удобство и функциональность</h3>
-                        <p class="text-black text-[13px]">Компания TRUE продумывает все технические нюансы и делает тренажеры максимально удобными и функциональными</p>
-                    </div>
-                </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="КАРДИО ТРЕНАЖЕРЫ" data-uz="KARDIO TRENAJYORLAR">КАРДИО ТРЕНАЖЕРЫ</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Высококачественные кардио тренажеры TRUE FITNESS обеспечивают эффективные тренировки с максимальным комфортом и долговечностью." data-uz="TRUE FITNESS yuqori sifatli kardio trenajyorlari maksimal qulaylik va uzoq muddatli foydalanish imkonini beradi.">Высококачественные кардио тренажеры TRUE FITNESS обеспечивают эффективные тренировки с максимальным комфортом и долговечностью.</p>
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
 
+        <!-- Card 2: Беговая дорожка -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/yugurvotti.png" alt="Беговая дорожка" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="БЕГОВЫЕ ДОРОЖКИ" data-uz="YUGURISH YO'LLARI">БЕГОВЫЕ ДОРОЖКИ</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="БЕГОВЫЕ ДОРОЖКИ" data-uz="YUGURISH YO'LLARI">БЕГОВЫЕ ДОРОЖКИ</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Профессиональные беговые дорожки с передовыми технологиями амортизации для защиты суставов и максимальной производительности." data-uz="Ilg'or amortizatsiya texnologiyalari bilan professional yugurish yo'llari bo'g'imlarni himoya qiladi.">Профессиональные беговые дорожки с передовыми технологиями амортизации для защиты суставов и максимальной производительности.</p>
+            </div>
+          </div>
+        </div>
 
-     <footer class="flex flex-col md:flex-row bg-[#01AEE7] pt-10 pb-6 text-white">
-     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
-      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КАТАЛОГ ТОВАРОВ</h2>
-      <div class="flex flex-col gap-2 text-[14px]">
-        <a href="#" class="hover:text-true-yellow transition-colors">Кардио тренажеры</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Composite Strength</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">True Stretch</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Сайклинг</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Групповые тренировки</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Силовые тренажеры</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Консоли</a>
-      </div>
-     </div>
+        <!-- Card 3: Силовые -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/bratla.png" alt="Силовые тренажеры" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="СИЛОВЫЕ ТРЕНАЖЕРЫ" data-uz="KUCH TRENAJYORLARI">СИЛОВЫЕ ТРЕНАЖЕРЫ</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="СИЛОВЫЕ ТРЕНАЖЕРЫ" data-uz="KUCH TRENAJYORLARI">СИЛОВЫЕ ТРЕНАЖЕРЫ</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Комплексное силовое оборудование для профессиональных спортзалов с максимальной нагрузкой и долговечностью конструкции." data-uz="Professional sport zallar uchun kuch jihozlari. Maksimal yuk ko'tarish va konstruktsiyaning uzoq muddatligi.">Комплексное силовое оборудование для профессиональных спортзалов с максимальной нагрузкой и долговечностью конструкции.</p>
+            </div>
+          </div>
+        </div>
 
-     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
-      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">ИНФОРМАЦИЯ</h2>
-      <div class="flex flex-col gap-2 text-[14px]">
-        <a href="#" class="hover:text-true-yellow transition-colors">О Бренде</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Преимущества</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Открыть клуб</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Продукции</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
-      </div>
-      </div>
+        <!-- Card 4: Smart технологии -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/computer.png" alt="Smart технологии" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="SMART ТЕХНОЛОГИИ" data-uz="SMART TEXNOLOGIYALAR">SMART ТЕХНОЛОГИИ</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="SMART ТЕХНОЛОГИИ" data-uz="SMART TEXNOLOGIYALAR">SMART ТЕХНОЛОГИИ</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Цифровые консоли с Bluetooth, Wi-Fi и совместимостью с приложениями для отслеживания тренировок в реальном времени." data-uz="Bluetooth, Wi-Fi va real vaqtda mashg'ulotlarni kuzatish ilovalariga mos keladigan raqamli konsollar.">Цифровые консоли с Bluetooth, Wi-Fi и совместимостью с приложениями для отслеживания тренировок в реальном времени.</p>
+            </div>
+          </div>
+        </div>
 
-     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
-      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КОНТАКТЫ</h2>
-      <div class="flex flex-col gap-2 text-[14px]">
-        <a href="#" class="hover:text-true-yellow transition-colors">Политика конфиденциальности</a>
-        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
-      </div>
-      </div>
+        <!-- Card 5: Эллипсоиды -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/scohiuzun.png" alt="Эллипсоиды" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="ЭЛЛИПСОИДЫ" data-uz="ELLIPSOIDLAR">ЭЛЛИПСОИДЫ</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="ЭЛЛИПСОИДЫ" data-uz="ELLIPSOIDLAR">ЭЛЛИПСОИДЫ</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Эллипсоиды TRUE FITNESS сочетают эффективность беговых дорожек и велотренажеров, обеспечивая тренировку всего тела." data-uz="TRUE FITNESS ellipsoidlari yugurish yo'llari va velosiped mashinalari samaradorligini birlashtiradi.">Эллипсоиды TRUE FITNESS сочетают эффективность беговых дорожек и велотренажеров, обеспечивая тренировку всего тела.</p>
+            </div>
+          </div>
+        </div>
 
-     <div class="flex-1 px-4 md:px-12 flex flex-col"> 
-      <h2 class="font-bold text-[16px] mb-4 w-max">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
-      <form onsubmit="event.preventDefault(); alert('Спасибо за подписку!');" class="flex flex-col gap-2">
-          <input type="email" placeholder="Ваш Email" class="bg-white/10 border border-white/30 px-3 py-2 text-white placeholder-white/50 outline-none focus:border-true-yellow">
-          <button type="submit" class="bg-yellow-300 text-black font-bold py-2 uppercase hover:bg-white transition-colors">Подписаться</button>
-      </form>
+        <!-- Card 6: Качество -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/qzi.png" alt="Качество" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="КАЧЕСТВО СБОРКИ" data-uz="YIG'ISH SIFATI">КАЧЕСТВО СБОРКИ</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="КАЧЕСТВО СБОРКИ" data-uz="YIG'ISH SIFATI">КАЧЕСТВО СБОРКИ</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Каждый тренажер TRUE FITNESS проходит многоуровневый контроль качества и сертифицирован по международным стандартам ISO." data-uz="Har bir TRUE FITNESS trenajyori ko'p bosqichli sifat nazoratidan o'tadi va xalqaro ISO standartlariga muvofiq sertifikatlangan.">Каждый тренажер TRUE FITNESS проходит многоуровневый контроль качества и сертифицирован по международным стандартам ISO.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7: Сервис 24/7 -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/soat.png" alt="Сервис" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="СЕРВИС 24/7" data-uz="XIZMAT 24/7">СЕРВИС 24/7</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="СЕРВИС 24/7" data-uz="XIZMAT 24/7">СЕРВИС 24/7</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Круглосуточная техническая поддержка и профессиональное обслуживание с быстрым реагированием на любые запросы клиентов." data-uz="Har qanday mijoz so'rovlariga tezkor javob berib, 24 soat texnik qo'llab-quvvatlash.">Круглосуточная техническая поддержка и профессиональное обслуживание с быстрым реагированием на любые запросы клиентов.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8: Доставка -->
+        <div class="flip-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="./images/doda.png" alt="Доставка" class="w-full h-56 object-cover">
+              <div class="p-4 bg-white">
+                <h3 class="font-bold text-[14px] text-gray-900 uppercase tracking-wide" data-ru="БЫСТРАЯ ДОСТАВКА" data-uz="TEZKOR YETKAZIB BERISH">БЫСТРАЯ ДОСТАВКА</h3>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <svg class="w-10 h-10 mb-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+              <h3 class="font-black text-base mb-3 uppercase" data-ru="БЫСТРАЯ ДОСТАВКА" data-uz="TEZKOR YETKAZIB BERISH">БЫСТРАЯ ДОСТАВКА</h3>
+              <p class="text-sm opacity-90 leading-relaxed" data-ru="Профессиональная доставка и монтаж оборудования по всему Узбекистану с гарантией сохранности и точных сроков." data-uz="O'zbekiston bo'ylab professional yetkazib berish va jihozlarni o'rnatish, xavfsizlik va aniq muddatlarga kafolat.">Профессиональная доставка и монтаж оборудования по всему Узбекистану с гарантией сохранности и точных сроков.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
-      
-      <div class="w-full text-center text-xs opacity-70 mt-8 md:mt-0 md:absolute md:bottom-4">
-         © TRUE FITNESS <span id="year"></span>
+    </div>
+  </section>
+
+  <!-- TOP 5 BADGE SECTION -->
+  <section class="badge-section py-20 px-4 text-white relative overflow-hidden" data-aos="fade-up">
+    <div class="absolute inset-0 opacity-5" style="background-image:repeating-linear-gradient(45deg,white 0,white 1px,transparent 0,transparent 50%);background-size:20px 20px;"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-shrink-0" data-aos="zoom-in">
+        <div class="relative">
+          <div class="w-52 h-52 rounded-full border-4 border-[#FFF500] flex flex-col items-center justify-center text-center bg-white/10">
+            <div class="text-[#FFF500] font-black leading-none" style="font-size:5rem;">5</div>
+            <div class="text-white font-black text-2xl leading-tight">TOP</div>
+          </div>
+          <div class="absolute -top-2 -right-2 bg-[#FFF500] text-black text-xs font-black px-3 py-1 rotate-12">МИРОВОЙ</div>
+        </div>
       </div>
+      <div data-aos="fade-left" data-aos-delay="200">
+        <p class="text-[#FFF500] font-bold text-sm tracking-[0.2em] uppercase mb-4" data-ru="ДОСТИЖЕНИЯ БРЕНДА" data-uz="BREND YUTUQLARI">ДОСТИЖЕНИЯ БРЕНДА</p>
+        <h2 class="text-3xl md:text-5xl font-black uppercase leading-tight mb-8" data-ru="БРЕНД TRUE FITNESS ВХОДИТ В ТОП 5 КРУПНЕЙШИХ ПРОИЗВОДИТЕЛЕЙ ФИТНЕС ОБОРУДОВАНИЯ" data-uz="TRUE FITNESS BRENDI FITNES USKUNALARI ISHLAB CHIQARUVCHILARNING TOP 5 GA KIRADI">БРЕНД TRUE FITNESS ВХОДИТ В ТОП 5 КРУПНЕЙШИХ ПРОИЗВОДИТЕЛЕЙ ФИТНЕС ОБОРУДОВАНИЯ</h2>
+        <div class="flex flex-wrap gap-8 mt-6">
+          <div class="text-center">
+            <div class="text-4xl font-black text-[#FFF500]">30+</div>
+            <div class="text-sm opacity-80 mt-1" data-ru="лет на рынке" data-uz="yillik tajriba">лет на рынке</div>
+          </div>
+          <div class="w-px bg-white/30 hidden md:block"></div>
+          <div class="text-center">
+            <div class="text-4xl font-black text-[#FFF500]">100+</div>
+            <div class="text-sm opacity-80 mt-1" data-ru="стран мира" data-uz="davlatda">стран мира</div>
+          </div>
+          <div class="w-px bg-white/30 hidden md:block"></div>
+          <div class="text-center">
+            <div class="text-4xl font-black text-[#FFF500]">50K+</div>
+            <div class="text-sm opacity-80 mt-1" data-ru="клубов по всему миру" data-uz="butun dunyo bo'ylab klublar">клубов по всему миру</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section py-32 px-4">
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="max-w-xl" data-aos="fade-right">
+        <p class="text-[#01AEE7] font-bold text-sm tracking-widest uppercase mb-4" data-ru="СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ" data-uz="MAXSUS TAKLIF">СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ</p>
+        <h2 class="text-white text-3xl md:text-5xl font-black uppercase leading-tight mb-10" data-ru="ПОЛУЧИТЕ ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ НА ТРЕНАЖЕРЫ TRUE FITNESS" data-uz="TRUE FITNESS TRENAJYORLARI UCHUN EKSKLYUZIV TAKLIF OLING">ПОЛУЧИТЕ ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ НА ТРЕНАЖЕРЫ TRUE FITNESS</h2>
+        <form onsubmit="handleCtaSubmit(event)" class="space-y-4">
+          <input type="text" id="ctaName" placeholder="ВАШЕ ИМЯ" class="w-full bg-white/10 border border-white/30 text-white placeholder-white/60 px-5 py-4 font-semibold text-sm tracking-wider outline-none focus:border-[#01AEE7] transition-all">
+          <input type="tel" id="ctaPhone" placeholder="+998 (99) 999-99-99" class="w-full bg-white/10 border border-white/30 text-white placeholder-white/60 px-5 py-4 font-semibold text-sm tracking-wider outline-none focus:border-[#01AEE7] transition-all">
+          <input type="email" id="ctaEmail" placeholder="EMAIL" class="w-full bg-white/10 border border-white/30 text-white placeholder-white/60 px-5 py-4 font-semibold text-sm tracking-wider outline-none focus:border-[#01AEE7] transition-all">
+          <button type="submit" class="w-full bg-[#01AEE7] hover:bg-[#FFF500] hover:text-black text-white font-black text-sm tracking-[0.2em] py-4 transition-all duration-300" data-ru="ПОЛУЧИТЬ ПРЕДЛОЖЕНИЕ" data-uz="TAKLIF OLISH">ПОЛУЧИТЬ ПРЕДЛОЖЕНИЕ</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#01AEE7] pt-10 pb-6 text-white relative">
+    <div class="max-w-[1300px] mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <h2 class="font-bold text-[14px] mb-4 border-b border-white/30 pb-2" data-ru="КАТАЛОГ ТОВАРОВ" data-uz="MAHSULOTLAR KATALOGI">КАТАЛОГ ТОВАРОВ</h2>
+        <div class="flex flex-col gap-2 text-[13px]">
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Кардио тренажеры" data-uz="Kardio trenajyorlar">Кардио тренажеры</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors">Composite Strength</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors">True Stretch</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Сайклинг" data-uz="Sайклинг">Сайклинг</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Групповые тренировки" data-uz="Guruh mashg'ulotlari">Групповые тренировки</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Силовые тренажеры" data-uz="Kuch trenajyorlari">Силовые тренажеры</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Консоли" data-uz="Konsollar">Консоли</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-bold text-[14px] mb-4 border-b border-white/30 pb-2" data-ru="ИНФОРМАЦИЯ" data-uz="MA'LUMOT">ИНФОРМАЦИЯ</h2>
+        <div class="flex flex-col gap-2 text-[13px]">
+          <a href="./index.html" class="hover:text-[#FFF500] transition-colors" data-ru="О Бренде" data-uz="Brend haqida">О Бренде</a>
+          <a href="./prem.html" class="hover:text-[#FFF500] transition-colors" data-ru="Преимущества" data-uz="Afzalliklar">Преимущества</a>
+          <a href="./club.html" class="hover:text-[#FFF500] transition-colors" data-ru="Открыть клуб" data-uz="Klub ochish">Открыть клуб</a>
+          <a href="./product.html" class="hover:text-[#FFF500] transition-colors" data-ru="Продукции" data-uz="Mahsulotlar">Продукции</a>
+          <a href="./contact.html" class="hover:text-[#FFF500] transition-colors" data-ru="Контакты" data-uz="Kontaktlar">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-bold text-[14px] mb-4 border-b border-white/30 pb-2" data-ru="КОНТАКТЫ" data-uz="KONTAKTLAR">КОНТАКТЫ</h2>
+        <div class="flex flex-col gap-2 text-[13px]">
+          <a href="#" class="hover:text-[#FFF500] transition-colors" data-ru="Политика конфиденциальности" data-uz="Maxfiylik siyosati">Политика конфиденциальности</a>
+          <a href="./contact.html" class="hover:text-[#FFF500] transition-colors" data-ru="Контакты" data-uz="Kontaktlar">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-bold text-[14px] mb-4" data-ru="ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ" data-uz="YANGILIKLAR VA AKSIYALARGA OBUNA">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
+        <form onsubmit="event.preventDefault();" class="flex gap-2">
+          <input type="email" placeholder="E-MAIL" class="flex-1 bg-white text-black px-3 py-2 text-sm outline-none min-w-0">
+          <button type="submit" class="bg-[#FFF500] text-black font-bold px-4 py-2 hover:bg-white transition-colors text-lg">›</button>
+        </form>
+        <div class="flex gap-4 mt-4 text-lg">
+          <a href="#" class="hover:text-[#FFF500]">f</a>
+          <a href="#" class="hover:text-[#FFF500]">📷</a>
+          <a href="#" class="hover:text-[#FFF500]">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-xs opacity-60 mt-8">© TRUE FITNESS 2025</div>
   </footer>
 
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script src="./main.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="./shared.js"></script>
+  <script>
+    function handleCtaSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('ctaName').value;
+      const phone = document.getElementById('ctaPhone').value;
+      if (!name || name.length < 2) { alert('Введите имя'); return; }
+      if (!phone || phone.length < 5) { alert('Введите телефон'); return; }
+      document.getElementById('ctaName').value = '';
+      document.getElementById('ctaPhone').value = '';
+      document.getElementById('ctaEmail').value = '';
+      showToast('Заявка отправлена! Мы свяжемся с вами.');
+    }
+  </script>
 </body>
-
 </html>
