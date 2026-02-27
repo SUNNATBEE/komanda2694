@@ -1,48 +1,514 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRUE Fitness</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'true-blue': '#01AEE7',
+            'true-dark': '#0FA3C7',
+            'true-yellow': '#FFF500',
+          },
+          fontFamily: {
+            'montserrat': ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+    
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
 </head>
 
-<body>
+<body class="m-0 p-0 font-montserrat text-base-content overflow-x-hidden antialiased">
 
+  <div class="fixed top-0 left-0 h-1 bg-true-yellow z-[60] transition-all duration-100" id="progressBar" style="width: 0%"></div>
 
-    <header class="py-4 bg-white">
-        <div class="container max-w-[1300px] w-full mx-auto px-3">
-            <img class="flex justify-center mx-auto my-3" src="./images/log.png" alt="">
-            <ul class="flex items-center justify-between my-3 border-t-2">
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./index.html">Дом</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./product.html">продукции</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./prem.html">преимущества</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./club.html">открыть клуб</a>
-                </li>
-                <li>
-                    <a class="text-lg font-bold text-black hover:text-red-600 duration-300 transition-all" href="./contact.html">контакты</a>
-                </li>
-            </ul>
+  <header class="py-4 bg-white sticky top-0 z-50 shadow-sm">
+    <div class="max-w-[1300px] w-full mx-auto px-4">
+      <div class="flex justify-center relative mb-4 lg:mb-0">
+        <img class="h-12 w-auto mx-auto" src="./images/log.png" alt="Logo">
+        
+        <button id="mobileMenuBtn" class="absolute right-0 top-0 lg:hidden text-black p-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+
+      <nav id="navMenu" class="hidden lg:block mt-4 border-t-2 pt-3 transition-all duration-300">
+        <ul class="flex flex-col lg:flex-row items-center justify-between gap-y-4 lg:gap-y-0">
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./index.html">Дом</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./product.html">Продукции</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./prem.html">Преимущества</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./club.html">Открыть клуб</a></li>
+          <li><a class="text-lg font-bold text-black hover:text-red-600 transition-all duration-300" href="./contact.html">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="w-full bg-[url('./images/image.png')] bg-cover bg-center relative min-h-[500px] lg:h-[672px] flex items-center overflow-hidden">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="max-w-[1300px] w-full mx-auto px-4 h-full flex flex-col items-center justify-center relative z-10 py-12 perspective-container">
+      
+      <div data-aos="zoom-in" class="w-[140px] h-[140px] md:w-[180px] md:h-[180px] mb-6 cursor-pointer hover:scale-105 transition-transform shadow-2xl rounded-full overflow-hidden">
+        <svg class="w-full h-full" viewBox="0 0 180 180" fill="none">
+          <circle cx="90" cy="84" r="50" fill="#01AEE7"/>
+          <path d="M120 84L75 109.981L75 58.0192L120 84Z" fill="#C3F3F3"/>
+        </svg>
+      </div>
+
+      <h2 id="typewriter" class="text-center font-bold text-[32px] md:text-[50px] text-[#EEEEEE] max-w-[900px] leading-tight drop-shadow-lg transition-transform duration-100 ease-out">
+        TRUE FITNESS - ПРЕМИУМ ТРЕНАЖЕРЫ ИЗ США
+      </h2>
+
+    </div>
+  </section>
+
+  <section class="w-full bg-gradient-to-r from-[#0FA3C7] to-[#66BFD6] py-12 md:py-16">
+    <div class="max-w-[1300px] w-full mx-auto px-4 flex flex-col items-center text-center">
+      <div data-aos="fade-right" class="w-[150px] md:w-[230px] h-[3px] bg-lime-400 mb-6"></div>
+      <h2 data-aos="fade-up" class="uppercase font-bold text-2xl md:text-4xl text-white max-w-[900px] leading-snug tracking-wide">
+        TRUE - ведущий мировой производитель премиального фитнес оборудования
+      </h2>
+      <div data-aos="fade-left" class="w-[150px] md:w-[230px] h-[3px] bg-lime-400 mt-6"></div>
+    </div>
+  </section>
+  
+  
+  <section id="features" class="max-w-[1300px] w-full mx-auto px-4 mt-12 md:mt-[50px] relative overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div data-aos="fade-right" class="order-2 lg:order-1 z-10">
+        <h2 class="font-bold text-5xl md:text-6xl text-black leading-tight tracking-tight">
+          TRUE <br>
+          <span class="text-[#01AEE7]">FITNESS</span>
+        </h2>
+        <div class="w-[150px] md:w-[230px] h-[3px] bg-[#FFF500] mt-6 mb-6"></div>
+        <h3 class="font-bold text-[24px] md:text-[30px] text-black uppercase leading-[1.2] max-w-lg">
+          СОВРЕМЕННОЕ И НАДЕЖНОЕ ОБОРУДОВАНИЕ ДЛЯ ФИТНЕС-КЛУБОВ
+        </h3>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-8">
+          <h2 class="font-bold text-[24px] md:text-[30px] text-[#01AEE7] uppercase">
+            КАРдио тренажеры
+          </h2>
+          <div class="flex gap-3">
+            <label aria-label="1" class="relative block w-[22px] h-[22px] rounded-full">
+              <input type="radio" name="circle" class="peer hidden" checked>
+              <span class="absolute inset-0 bg-[#CACACA] cursor-pointer peer-checked:bg-[#FFF500]"></span>
+            </label>
+            <label aria-label="2" class="relative block w-[22px] h-[22px] rounded-full">
+              <input type="radio" name="circle" class="peer hidden">
+              <span class="absolute inset-0 bg-[#CACACA] cursor-pointer peer-checked:bg-[#FFF500]"></span>
+            </label>
+            <label aria-label="3" class="relative block w-[22px] h-[22px] rounded-full">
+              <input type="radio" name="circle" class="peer hidden">
+              <span class="absolute inset-0 bg-[#CACACA] cursor-pointer peer-checked:bg-[#FFF500]"></span>
+            </label>
+            <label aria-label="4" class="relative block w-[22px] h-[22px] rounded-full">
+              <input type="radio" name="circle" class="peer hidden">
+              <span class="absolute inset-0 bg-[#CACACA] cursor-pointer peer-checked:bg-[#FFF500]"></span>
+            </label>
+          </div>
         </div>
-    </header>
+      </div>
+
+      <div data-aos="fade-left" class="order-1 lg:order-2 flex justify-center lg:justify-end relative z-10">
+        <img src="./images/64094974fe075d3b6f9dfaf79853aa27cfce5c8f.png" alt="" class="max-w-full w-full md:w-[500px] h-auto">
+      </div>
+    </div>
+
+    <svg class="absolute top-0 right-0 z-0 opacity-20 pointer-events-none hidden lg:block" width="541" height="528" viewBox="0 0 541 528" fill="none">
+      <path d="M247.847 290.488L541 0V197.212L247.847 290.488Z" fill="#01AEE7"/>
+      <path d="M87.9458 442.394L541 231.857V527.675H0L87.9458 442.394Z" fill="#01AEE7"/>
+    </svg>
+  </section>
 
 
-    <main>
-        <section>
-            Home Abdullo
-        </section>
-    </main>
+  <section class="bg-[#F5F5F5] w-full py-16 md:py-[100px]">
+    <div class="max-w-[1300px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      
+      <div class="flex flex-col gap-[17px] h-full">
+        <div data-aos="fade-up" class="bg-[url('./images/9745a5074e44a7c399488fc7d82bf83fe8ea8c0b.png')] bg-cover bg-center w-full h-[250px] md:h-[500px] relative">
+          <div class="absolute inset-0 bg-black/30 hover:bg-transparent transition-colors duration-500"></div>
+          <h2 class="uppercase mt-[80px] md:mt-[140px] font-bold text-[20px] md:text-[30px] text-[#FFFFFF] ml-6 md:ml-[55px] relative z-10">Лучшие <br> характеристики</h2>
+          <div class="w-[100px] md:w-[243px] h-[3px] bg-[#FFF500] mt-2 md:mt-[44px] mb-2 md:mb-[29px] ml-6 md:ml-[55px] relative z-10"></div>
+          <p class="w-[90%] md:w-[577px] text-[12px] md:text-lg text-[#F5F5F5] font-normal ml-6 md:ml-[55px] relative z-10">Наши тренажеры имеют самые совершенные характеристики в классе, от более мощных технических показателей до расширенных функциональных возможностей</p>
+        </div>
 
-    <script src="./main.js"></script>
+        <div data-aos="fade-up" class="bg-[#01AEE7] w-full h-[125px] md:h-[250px] flex flex-col justify-center p-6 md:p-12">
+          <h2 class="font-bold text-[16px] md:text-[30px] text-[#FFFFFF] w-full md:w-[531px]">ВЫСОКОЕ КАЧЕСТВО И НАДЕЖНОСТЬ</h2>
+          <div class="w-[100px] md:w-[243px] h-[2px] bg-[#FFF500] mt-2 md:mt-4 mb-2 md:mb-4"></div>
+          <p class="font-normal text-[12px] md:text-lg text-[#FFFFFF] uppercase w-full md:w-[585px]">Высокое качество тренажеров - это визитная карточка TRUE. Кроме того TRUE предоставляет до 5 лет гарантии на кардиотренажеры.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-[17px] h-full">
+        <div data-aos="fade-up" class="bg-[#01AEE7] w-full h-[125px] md:h-[250px] flex flex-col justify-center p-6 md:p-12">
+          <h2 class="font-bold text-[16px] md:text-[30px] text-[#FFFFFF] w-full md:w-[531px]">Низкая СТОИМОСТЬ ВЛАДЕНИЕ</h2>
+          <div class="w-[100px] md:w-[243px] h-[2px] bg-[#FFF500] mt-2 md:mt-4 mb-2 md:mb-4"></div>
+          <p class="font-normal text-[12px] md:text-lg text-[#FFFFFF] uppercase w-full md:w-[585px]">Надежность оборудования обеспечивает низкие затраты на сервисное обслуживание, так по стоимости затрат на эксплуатацию TRUE выигрывает у конкурентов.</p>
+        </div>
+
+        <div data-aos="fade-up" class="bg-[url('./images/97d1bf902742bb34fa8ea6c5254768092bdd045a.png')] bg-cover bg-center w-full h-[250px] md:h-[500px] relative">
+          <div class="absolute inset-0 bg-black/30 hover:bg-transparent transition-colors duration-500"></div>
+          <h2 class="uppercase mt-[80px] md:mt-[140px] font-bold text-[20px] md:text-[30px] text-[#FFFFFF] ml-6 md:ml-[55px] relative z-10">Экосистема <br> технологий</h2>
+          <div class="w-[100px] md:w-[243px] h-[3px] bg-[#FFF500] mt-2 md:mt-[44px] mb-2 md:mb-[29px] ml-6 md:ml-[55px] relative z-10"></div>
+          <p class="w-[90%] md:w-[577px] text-[12px] md:text-lg text-[#F5F5F5] font-normal ml-6 md:ml-[55px] relative z-10">Интеграция с современными приложениями и фитнес-браслетами для лучшего опыта пользователей.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<section class="bg-[#EEEEEE] w-full py-12 overflow-x-auto">
+  <div class="min-w-[1300px] w-[1300px] mx-auto h-[1263px] flex relative">
+  <div class="flex-shrink-0">
+    <div class="flex flex-col">
+      <div class="ml-[100px]">
+        <h1 class="w-[541px] h-[74px] mt-[100px] font-['Montserrat'] font-bold text-[30px] text-[#01AEE7]">
+          Мы предлагаем полный комплекс услуг
+        </h1>
+      </div>
+      <div class="flex items-center">
+        <div class="mt-[194px] w-[245px] h-[210px] ml-[100px]">
+          <svg width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_1_639" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="70" height="63">
+              <path d="M2 39.5002C2 38.3951 2.34613 37.3353 2.96224 36.5539C3.57836 35.7725 4.41399 35.3335 5.2853 35.3335H11.8559V60.3335H5.2853C4.41399 60.3335 3.57836 59.8945 2.96224 59.1131C2.34613 58.3317 2 57.2719 2 56.1668V39.5002ZM57.8501 35.3335H64.4207C65.2921 35.3335 66.1277 35.7725 66.7438 36.5539C67.3599 37.3353 67.7061 38.3951 67.7061 39.5002V56.1668C67.7061 57.2719 67.3599 58.3317 66.7438 59.1131C66.1277 59.8945 65.2921 60.3335 64.4207 60.3335H57.8501V35.3335Z" fill="white"/>
+              <path d="M11.8559 56.1667V31.1667C11.8559 15.0583 22.152 2 34.853 2C47.554 2 57.8501 15.0583 57.8501 31.1667V56.1667M11.8559 35.3333H5.2853C4.41399 35.3333 3.57836 35.7723 2.96224 36.5537C2.34613 37.3351 2 38.3949 2 39.5V56.1667C2 57.2717 2.34613 58.3315 2.96224 59.1129C3.57836 59.8943 4.41399 60.3333 5.2853 60.3333H11.8559V35.3333ZM57.8501 35.3333H64.4208C65.2921 35.3333 66.1277 35.7723 66.7438 36.5537C67.3599 37.3351 67.7061 38.3949 67.7061 39.5V56.1667C67.7061 57.2717 67.3599 58.3315 66.7438 59.1129C66.1277 59.8943 65.2921 60.3333 64.4208 60.3333H57.8501V35.3333Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.7119 47.8335H28.2825L31.5678 35.3335L38.1384 60.3335L41.4237 47.8335H47.9943" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </mask>
+            <g mask="url(#mask0_1_639)">
+              <path d="M-4.57056 -18.8335H74.2767V81.1665H-4.57056V-18.8335Z" fill="#01AEE7"/>
+            </g>
+          </svg>
+          <h2 class="mt-6 w-[185px] h-[22px] text-lg font-['Montserrat'] font-bold">КОНСАЛТИНГ</h2>
+          <p class="w-[245px] h-[90px] text-[15px] font-normal mt-4">
+            Помогаем в разработке концепции клуба, зонировании, оснащении и расчете финансовых показателей.
+          </p>
+        </div>
+        <div class="mt-[194px] ml-[200px] w-[281px] h-[190px]">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5001 10C14.6269 10 11.8714 11.1414 9.83976 13.173C7.80811 15.2047 6.66675 17.9602 6.66675 20.8333V50.8333C6.66675 53.7065 7.80811 56.462 9.83976 58.4937C11.8714 60.5253 14.6269 61.6667 17.5001 61.6667H52.5001C55.3733 61.6667 58.1288 60.5253 60.1604 58.4937C62.1921 56.462 63.3334 53.7065 63.3334 50.8333V20.8333C63.3334 17.9602 62.1921 15.2047 60.1604 13.173C58.1288 11.1414 55.3733 10 52.5001 10H17.5001ZM26.6667 44.1667V25.8367C26.6669 25.388 26.7878 24.9476 27.0168 24.5617C27.2458 24.1758 27.5744 23.8587 27.9682 23.6436C28.3619 23.4284 28.8063 23.3232 29.2548 23.339C29.7032 23.3548 30.1391 23.491 30.5167 23.7333L45.9101 33.5967C46.1454 33.7475 46.3391 33.955 46.4732 34.2002C46.6073 34.4455 46.6776 34.7205 46.6776 35C46.6776 35.2795 46.6073 35.5545 46.4732 35.7998C46.3391 36.045 46.1454 36.2525 45.9101 36.4033L30.5167 46.2667C30.1391 46.509 29.7032 46.6452 29.2548 46.661C28.8063 46.6768 28.3619 46.5716 27.9682 46.3564C27.5744 46.1413 27.2458 45.8242 27.0168 45.4383C26.7878 45.0524 26.6669 44.612 26.6667 44.1633V44.1667ZM25.8334 70C24.0134 70.0017 22.2224 69.5444 20.626 68.6705C19.0296 67.7965 17.6793 66.5341 16.7001 65H54.1668C57.482 65 60.6614 63.683 63.0056 61.3388C65.3498 58.9946 66.6668 55.8152 66.6668 52.5V20.0333C68.2009 21.0126 69.4633 22.3628 70.3372 23.9592C71.2112 25.5557 71.6684 27.3467 71.6667 29.1667V52.5C71.6667 62.1667 63.8334 70 54.1668 70H25.8334Z" fill="#01AEE7"/>
+          </svg>
+          <h2 class="mt-1 w-[242px] h-[44px] text-lg font-['Montserrat'] font-bold">МОНТАЖ И СЕРВИСНОЕ ОБСЛУЖИВАНИЕ</h2>
+          <p class="w-[245px] h-[90px] text-[15px] font-normal mt-4">
+            Полный цикл пуско-наладочных работ, а также сервисного обслуживания тренажеров.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div class="mt-[92px] w-[245px] h-[210px] ml-[100px]">
+          <svg width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_1_640" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="70" height="63">
+              <path d="M2 39.5002C2 38.3951 2.34613 37.3353 2.96224 36.5539C3.57836 35.7725 4.41399 35.3335 5.2853 35.3335H11.8559V60.3335H5.2853C4.41399 60.3335 3.57836 59.8945 2.96224 59.1131C2.34613 58.3317 2 57.2719 2 56.1668V39.5002ZM57.8501 35.3335H64.4207C65.2921 35.3335 66.1277 35.7725 66.7438 36.5539C67.3599 37.3353 67.7061 38.3951 67.7061 39.5002V56.1668C67.7061 57.2719 67.3599 58.3317 66.7438 59.1131C66.1277 59.8945 65.2921 60.3335 64.4207 60.3335H57.8501V35.3335Z" fill="white"/>
+              <path d="M11.8559 56.1667V31.1667C11.8559 15.0583 22.152 2 34.853 2C47.554 2 57.8501 15.0583 57.8501 31.1667V56.1667M11.8559 35.3333H5.2853C4.41399 35.3333 3.57836 35.7723 2.96224 36.5537C2.34613 37.3351 2 38.3949 2 39.5V56.1667C2 57.2717 2.34613 58.3315 2.96224 59.1129C3.57836 59.8943 4.41399 60.3333 5.2853 60.3333H11.8559V35.3333ZM57.8501 35.3333H64.4208C65.2921 35.3333 66.1277 35.7723 66.7438 36.5537C67.3599 37.3351 67.7061 38.3949 67.7061 39.5V56.1667C67.7061 57.2717 67.3599 58.3315 66.7438 59.1129C66.1277 59.8943 65.2921 60.3333 64.4208 60.3333H57.8501V35.3333Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.7119 47.8335H28.2825L31.5678 35.3335L38.1384 60.3335L41.4237 47.8335H47.9943" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </mask>
+            <g mask="url(#mask0_1_640)">
+              <path d="M-4.57056 -18.8335H74.2767V81.1665H-4.57056V-18.8335Z" fill="#01AEE7"/>
+            </g>
+          </svg>
+          <h2 class="mt-6 w-[185px] h-[22px] text-lg font-['Montserrat'] font-bold">КОНСАЛТИНГ</h2>
+          <p class="w-[245px] h-[90px] text-[15px] font-normal mt-4">
+            Помогаем в разработке концепции клуба, зонировании, оснащении и расчете финансовых показателей.
+          </p>
+        </div>
+        <div class="mt-[92px] ml-[200px] w-[281px] h-[190px]">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5001 10C14.6269 10 11.8714 11.1414 9.83976 13.173C7.80811 15.2047 6.66675 17.9602 6.66675 20.8333V50.8333C6.66675 53.7065 7.80811 56.462 9.83976 58.4937C11.8714 60.5253 14.6269 61.6667 17.5001 61.6667H52.5001C55.3733 61.6667 58.1288 60.5253 60.1604 58.4937C62.1921 56.462 63.3334 53.7065 63.3334 50.8333V20.8333C63.3334 17.9602 62.1921 15.2047 60.1604 13.173C58.1288 11.1414 55.3733 10 52.5001 10H17.5001ZM26.6667 44.1667V25.8367C26.6669 25.388 26.7878 24.9476 27.0168 24.5617C27.2458 24.1758 27.5744 23.8587 27.9682 23.6436C28.3619 23.4284 28.8063 23.3232 29.2548 23.339C29.7032 23.3548 30.1391 23.491 30.5167 23.7333L45.9101 33.5967C46.1454 33.7475 46.3391 33.955 46.4732 34.2002C46.6073 34.4455 46.6776 34.7205 46.6776 35C46.6776 35.2795 46.6073 35.5545 46.4732 35.7998C46.3391 36.045 46.1454 36.2525 45.9101 36.4033L30.5167 46.2667C30.1391 46.509 29.7032 46.6452 29.2548 46.661C28.8063 46.6768 28.3619 46.5716 27.9682 46.3564C27.5744 46.1413 27.2458 45.8242 27.0168 45.4383C26.7878 45.0524 26.6669 44.612 26.6667 44.1633V44.1667ZM25.8334 70C24.0134 70.0017 22.2224 69.5444 20.626 68.6705C19.0296 67.7965 17.6793 66.5341 16.7001 65H54.1668C57.482 65 60.6614 63.683 63.0056 61.3388C65.3498 58.9946 66.6668 55.8152 66.6668 52.5V20.0333C68.2009 21.0126 69.4633 22.3628 70.3372 23.9592C71.2112 25.5557 71.6684 27.3467 71.6667 29.1667V52.5C71.6667 62.1667 63.8334 70 54.1668 70H25.8334Z" fill="#01AEE7"/>
+          </svg>
+          <h2 class="mt-1 w-[242px] h-[44px] text-lg font-['Montserrat'] font-bold">МОНТАЖ И СЕРВИСНОЕ ОБСЛУЖИВАНИЕ</h2>
+          <p class="w-[245px] h-[90px] text-[15px] font-normal mt-4">
+            Полный цикл пуско-наладочных работ, а также сервисного обслуживания тренажеров.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div class="mt-[92px] w-[245px] h-[210px] ml-[100px]">
+          <svg width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_1_641" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="70" height="63">
+              <path d="M2 39.5002C2 38.3951 2.34613 37.3353 2.96224 36.5539C3.57836 35.7725 4.41399 35.3335 5.2853 35.3335H11.8559V60.3335H5.2853C4.41399 60.3335 3.57836 59.8945 2.96224 59.1131C2.34613 58.3317 2 57.2719 2 56.1668V39.5002ZM57.8501 35.3335H64.4207C65.2921 35.3335 66.1277 35.7725 66.7438 36.5539C67.3599 37.3353 67.7061 38.3951 67.7061 39.5002V56.1668C67.7061 57.2719 67.3599 58.3317 66.7438 59.1131C66.1277 59.8945 65.2921 60.3335 64.4207 60.3335H57.8501V35.3335Z" fill="white"/>
+              <path d="M11.8559 56.1667V31.1667C11.8559 15.0583 22.152 2 34.853 2C47.554 2 57.8501 15.0583 57.8501 31.1667V56.1667M11.8559 35.3333H5.2853C4.41399 35.3333 3.57836 35.7723 2.96224 36.5537C2.34613 37.3351 2 38.3949 2 39.5V56.1667C2 57.2717 2.34613 58.3315 2.96224 59.1129C3.57836 59.8943 4.41399 60.3333 5.2853 60.3333H11.8559V35.3333ZM57.8501 35.3333H64.4208C65.2921 35.3333 66.1277 35.7723 66.7438 36.5537C67.3599 37.3351 67.7061 38.3949 67.7061 39.5V56.1667C67.7061 57.2717 67.3599 58.3315 66.7438 59.1129C66.1277 59.8943 65.2921 60.3333 64.4208 60.3333H57.8501V35.3333Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.7119 47.8335H28.2825L31.5678 35.3335L38.1384 60.3335L41.4237 47.8335H47.9943" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </mask>
+            <g mask="url(#mask0_1_641)">
+              <path d="M-4.57056 -18.8335H74.2767V81.1665H-4.57056V-18.8335Z" fill="#01AEE7"/>
+            </g>
+          </svg>
+          <h2 class="mt-6 w-[185px] h-[22px] text-lg font-['Montserrat'] font-bold">КОНСАЛТИНГ</h2>
+          <p class="w-[245px] h-[90px] text-[15px] font-normal mt-4">
+            Помогаем в разработке концепции клуба, зонировании, оснащении и расчете финансовых показателей.
+          </p>
+        </div>
+        <div class="mt-[92px] ml-[200px] w-[281px] h-[190px]">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5001 10C14.6269 10 11.8714 11.1414 9.83976 13.173C7.80811 15.2047 6.66675 17.9602 6.66675 20.8333V50.8333C6.66675 53.7065 7.80811 56.462 9.83976 58.4937C11.8714 60.5253 14.6269 61.6667 17.5001 61.6667H52.5001C55.3733 61.6667 58.1288 60.5253 60.1604 58.4937C62.1921 56.462 63.3334 53.7065 63.3334 50.8333V20.8333C63.3334 17.9602 62.1921 15.2047 60.1604 13.173C58.1288 11.1414 55.3733 10 52.5001 10H17.5001ZM26.6667 44.1667V25.8367C26.6669 25.388 26.7878 24.9476 27.0168 24.5617C27.2458 24.1758 27.5744 23.8587 27.9682 23.6436C28.3619 23.4284 28.8063 23.3232 29.2548 23.339C29.7032 23.3548 30.1391 23.491 30.5167 23.7333L45.9101 33.5967C46.1454 33.7475 46.3391 33.955 46.4732 34.2002C46.6073 34.4455 46.6776 34.7205 46.6776 35C46.6776 35.2795 46.6073 35.5545 46.4732 35.7998C46.3391 36.045 46.1454 36.2525 45.9101 36.4033L30.5167 46.2667C30.1391 46.509 29.7032 46.6452 29.2548 46.661C28.8063 46.6768 28.3619 46.5716 27.9682 46.3564C27.5744 46.1413 27.2458 45.8242 27.0168 45.4383C26.7878 45.0524 26.6669 44.612 26.6667 44.1633V44.1667ZM25.8334 70C24.0134 70.0017 22.2224 69.5444 20.626 68.6705C19.0296 67.7965 17.6793 66.5341 16.7001 65H54.1668C57.482 65 60.6614 63.683 63.0056 61.3388C65.3498 58.9946 66.6668 55.8152 66.6668 52.5V20.0333C68.2009 21.0126 69.4633 22.3628 70.3372 23.9592C71.2112 25.5557 71.6684 27.3467 71.6667 29.1667V52.5C71.6667 62.1667 63.8334 70 54.1668 70H25.8334Z" fill="#01AEE7"/>
+          </svg>
+          <h2 class="mt-1 w-[242px] h-[44px] text-lg font-['Montserrat'] font-bold">МОНТАЖ И СЕРВИСНОЕ ОБСЛУЖИВАНИЕ</h2>
+          <p class="w-[245px] h-[90px] text-[15px] font-normal mt-4">
+            Полный цикл пуско-наладочных работ, а также сервисного обслуживания тренажеров.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-end items-start h-full flex-1">
+    <img src="./images/run.png" alt="" class="h-full object-cover">
+  </div>
+</section>
+
+  <section id="contact" class="w-full min-h-[80vh] bg-[url('./images/f975eaf401adaa542a1f182428cc51b0abf9658f.jpg')] bg-cover bg-center flex items-center justify-center px-4 py-12">
+      <div class="bg-white w-full max-w-[505px] p-6 md:p-8 shadow-2xl relative">
+          
+          <div id="notification" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-[#01AEE7] text-white px-6 py-3 shadow-xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span id="notificationText" class="font-medium">Успешно!</span>
+          </div>
+
+          <h1 class="w-full font-bold text-xl leading-tight mb-2">Получите эксклюзивное предложение на тренажеры TRUE FITNESS</h1>
+          <p class="w-full text-[13px] text-gray-600 mb-6">Мы будем рады проконсультировать Вас и помочь с подбором оборудования</p>
+
+          <div class="flex flex-col items-center w-full mx-auto">
+              
+              <div class="w-full mt-4 relative">
+                  <input type="text" id="nameInput" placeholder="ИМЯ" class="w-full h-[42px] bg-[#F0F0F0] py-[10px] px-[27px] text-black placeholder-[#AFA3A3] border-none outline-none text-[18px] transition-all duration-300 focus:ring-2 focus:ring-[#01AEE7]">
+                  <span id="nameError" class="text-red-500 text-xs absolute -bottom-5 left-0 hidden font-medium">Минимум 3 символа</span>
+              </div>
+
+              <div class="w-full mt-8 relative">
+                  <label for="emailInput" class="sr-only"></label>
+                  <input type="email" id="emailInput" placeholder="EMAIL" class="w-full h-[42px] bg-[#F0F0F0] py-[10px] px-[27px] text-black placeholder-[#AFA3A3] border-none outline-none text-[18px] transition-all duration-300 focus:ring-2 focus:ring-[#01AEE7]">
+                  <span id="emailError" class="text-red-500 text-xs absolute -bottom-5 left-0 hidden font-medium">Введите корректный email</span>
+              </div>
+
+              <div class="w-full mt-8 relative">
+                  <div class="flex items-center bg-[#F0F0F0] h-[42px] transition-all duration-300 focus-within:ring-2 focus-within:ring-[#01AEE7] overflow-hidden">
+                      <div class="flex items-center h-full pl-3 pr-2 border-r border-gray-300">
+                          <span class="text-black text-[18px] font-medium select-none">+998</span>
+                          <svg class="w-3 h-3 ml-2 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                      </div>
+                      <input type="tel" id="phoneInput" placeholder="(99)-999-99-99" class="flex-1 h-full bg-transparent border-none outline-none text-black text-[18px] px-3 placeholder-[#AFA3A3]">
+                  </div>
+                  <span id="phoneError" class="text-red-500 text-xs absolute -bottom-5 left-0 hidden font-medium">Неверный формат</span>
+              </div>
+
+              <button id="submitBtn" class="mt-10 w-full h-[46px] bg-[#01AEE7] text-white text-[18px] font-bold transition-all duration-300 hover:bg-[#0096C7] hover:scale-[1.02] active:scale-95 shadow-lg">ОТПРАВИТЬ</button>
+          </div>
+      </div>
+  </section>
+
+  <footer class="flex flex-col md:flex-row bg-[#01AEE7] pt-10 pb-6 text-white">
+     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КАТАЛОГ ТОВАРОВ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">Кардио тренажеры</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Composite Strength</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">True Stretch</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Сайклинг</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Групповые тренировки</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Силовые тренажеры</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Консоли</a>
+      </div>
+     </div>
+
+     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">ИНФОРМАЦИЯ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">О Бренде</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Преимущества</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Открыть клуб</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Продукции</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+      </div>
+      </div>
+
+     <div class="flex-1 px-4 md:px-12 flex flex-col mb-8 md:mb-0"> 
+      <h2 class="font-bold text-[16px] mb-4 border-b border-white/30 pb-2 w-max">КОНТАКТЫ</h2>
+      <div class="flex flex-col gap-2 text-[14px]">
+        <a href="#" class="hover:text-true-yellow transition-colors">Политика конфиденциальности</a>
+        <a href="#" class="hover:text-true-yellow transition-colors">Контакты</a>
+      </div>
+      </div>
+
+     <div class="flex-1 px-4 md:px-12 flex flex-col"> 
+      <h2 class="font-bold text-[16px] mb-4 w-max">ПОДПИСАТЬСЯ НА НОВОСТИ И АКЦИИ</h2>
+      <form onsubmit="event.preventDefault(); alert('Спасибо за подписку!');" class="flex flex-col gap-2">
+          <input type="email" placeholder="Ваш Email" class="bg-white/10 border border-white/30 px-3 py-2 text-white placeholder-white/50 outline-none focus:border-true-yellow">
+          <button type="submit" class="bg-true-yellow text-black font-bold py-2 uppercase hover:bg-white transition-colors">Подписаться</button>
+      </form>
+      </div>
+      
+      <div class="w-full text-center text-xs opacity-70 mt-8 md:mt-0 md:absolute md:bottom-4">
+         © TRUE FITNESS <span id="year"></span>
+      </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+      AOS.init({ once: true, offset: 100, duration: 800 });
+
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navMenu = document.getElementById('navMenu');
+
+      mobileMenuBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('hidden');
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const text = "TRUE FITNESS - ПРЕМИУМ ТРЕНАЖЕРЫ ИЗ США";
+      const typeWriterElement = document.getElementById('typewriter');
+      let i = 0;
+      typeWriterElement.innerHTML = "";
+
+      function typeWriter() {
+        if (i < text.length) {
+          typeWriterElement.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+      setTimeout(typeWriter, 500);
+
+      const nameInput = document.getElementById('nameInput');
+      const emailInput = document.getElementById('emailInput');
+      const phoneInput = document.getElementById('phoneInput');
+      const submitBtn = document.getElementById('submitBtn');
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const phoneError = document.getElementById('phoneError');
+      const notification = document.getElementById('notification');
+      const notificationText = document.getElementById('notificationText');
+      
+      let isSubmitted = false;
+
+      function showNotification(text, isError = false) {
+          notificationText.innerText = text;
+          notification.className = `fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-3 shadow-xl transition-all duration-300 z-50 flex items-center gap-3 w-max ${isError ? 'bg-red-500' : 'bg-[#01AEE7]'} text-white opacity-100 pointer-events-auto`;
+          
+          setTimeout(() => {
+              notification.classList.add('opacity-0', 'pointer-events-none');
+          }, 3000);
+      }
+
+      function toggleError(element, show, errorSpan) {
+          if (show) {
+              element.classList.add('bg-red-50');
+              element.classList.remove('bg-[#F0F0F0]');
+              errorSpan.classList.remove('hidden');
+          } else {
+              element.classList.remove('bg-red-50');
+              element.classList.add('bg-[#F0F0F0]');
+              errorSpan.classList.add('hidden');
+          }
+      }
+
+      nameInput.addEventListener('input', () => {
+          if (nameInput.value.length >= 3) toggleError(nameInput, false, nameError);
+      });
+
+      emailInput.addEventListener('input', () => {
+          if (emailInput.value.includes('@')) toggleError(emailInput, false, emailError);
+      });
+
+      phoneInput.addEventListener('input', (e) => {
+          let value = e.target.value.replace(/\D/g, '');
+          const maxDigits = 9;
+          if (value.length > maxDigits) value = value.slice(0, maxDigits);
+
+          let formattedValue = '';
+          if (value.length > 0) formattedValue += '(' + value.substring(0, 2);
+          if (value.length > 2) formattedValue += ')-' + value.substring(2, 5);
+          if (value.length > 5) formattedValue += '-' + value.substring(5, 7);
+          if (value.length > 7) formattedValue += '-' + value.substring(7, 9);
+
+          e.target.value = formattedValue;
+
+          if (value.length === maxDigits) toggleError(phoneInput, false, phoneError);
+      });
+
+      submitBtn.addEventListener('click', () => {
+          if (isSubmitted) {
+              showNotification('Вы уже отправили заявку!', true);
+              return;
+          }
+
+          let isValid = true;
+
+          if (nameInput.value.length < 3) {
+              toggleError(nameInput, true, nameError);
+              isValid = false;
+          }
+
+          if (!emailInput.value.includes('@')) {
+              toggleError(emailInput, true, emailError);
+              isValid = false;
+          }
+
+          const phoneDigits = phoneInput.value.replace(/\D/g, '').length;
+          if (phoneDigits !== 9) {
+              toggleError(phoneInput, true, phoneError);
+              isValid = false;
+          }
+
+          if (isValid) {
+              isSubmitted = true;
+              submitBtn.innerText = 'ОТПРАВКА...';
+              submitBtn.disabled = true;
+
+              setTimeout(() => {
+                  showNotification('Данные успешно отправлены!');
+                  submitBtn.innerText = 'ОТПРАВЛЕНО';
+                  submitBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                  submitBtn.classList.remove('bg-[#01AEE7]', 'hover:bg-[#0096C7]');
+                  
+                  nameInput.value = '';
+                  emailInput.value = '';
+                  phoneInput.value = '';
+              }, 1000);
+          } else {
+              submitBtn.classList.add('animate-pulse');
+              setTimeout(() => submitBtn.classList.remove('animate-pulse'), 500);
+          }
+      });
+
+      window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+      };
+
+      const heroText = document.getElementById('typewriter');
+      const heroSection = document.getElementById('home');
+
+      heroSection.addEventListener('mousemove', (e) => {
+          const { offsetWidth: width, offsetHeight: height } = heroSection;
+          let { offsetX: x, offsetY: y } = e;
+          
+          const xWalk = (x / width * 30) - 15;
+          const yWalk = (y / height * 30) - 15;
+
+          heroText.style.transform = `translateX(${xWalk}px) translateY(${yWalk}px)`;
+      });
+  </script>
 </body>
-
 </html>
